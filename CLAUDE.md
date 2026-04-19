@@ -12,82 +12,142 @@ npm run lint       # next lint
 npm run typecheck  # tsc --noEmit
 ```
 
-No test runner is configured — the MVP plan explicitly defers automated tests. Verify changes by running `npm run build` (catches TS + ESLint) and walking through the flow in the browser.
+No test runner is configured. Verify changes by running `npm run build` (catches TS + ESLint) and walking through the flow in the browser.
 
 ## Architecture
 
-**Single-user, frontend-only Next.js 14 App Router app.** No backend, no auth, no API routes. All state lives in Zustand and persists to `localStorage` under key `career-values-v1`.
+**Single-user, frontend-only Next.js 14 App Router app.** No backend, no auth, no API routes. All state lives in Zustand and persists to `localStorage`.
 
-### The flow is linear and gated
+Two independent card-sorting decks share the same layout shell, UI primitives, and i18n system:
 
-6 routes form a strict sequence: `/` → `/instructions` → `/sort` → `/rank` → `/choices` → `/results`. Later routes guard themselves: `/rank` redirects to `/sort` if Always ≠ 8 cards; `/choices` redirects to `/rank` if `rankedTop8.length !== 8`; `/results` redirects to `/choices` if the matrix is incomplete. Guards run inside `useEffect` after `useHydrated()` returns true — **never gate on store state before hydration**, you'll cause redirect loops on reload.
+| Deck | Cards | localStorage key | Routes |
+|---|---|---|---|
+| Career Values | 54 | `career-values-v1` | `/` → `/instructions` → `/sort` → `/rank` → `/choices` → `/results` |
+| Motivated Skills | 51 | `motivated-skills-v1` | `/skills` → `/skills/enjoyment` → `/skills/proficiency` → `/skills/results` |
 
-### State shape (`store/useCardSortStore.ts`)
+Each deck has its own Zustand store and `resetAll()` that clears **only its own** localStorage key — never the other deck's.
 
-One Zustand store holds the entire app state, wrapped in `persist` middleware:
+### State shapes
 
-- `cardBuckets: Record<cardId, BucketId>` — every card starts in `"unsorted"`; 5 other buckets are `always | often | sometimes | seldom | never`.
-- `rankedTop8: string[]` — ordered card IDs. Populated via `syncRankedFromAlways()` when leaving `/sort`.
-- `choices: Choice[]` — 2–5 user-defined options.
-- `matrix: Record<cardId, Record<choiceId, SupportValue>>` — sparse; cells start `undefined`. `SupportValue = 3 | 2 | 1 | -1 | "unknown"`.
+**Career Values** (`store/useCardSortStore.ts`):
+- `cardBuckets: Record<cardId, BucketId>` — `"unsorted" | "always" | "often" | "sometimes" | "seldom" | "never"`
+- `rankedTop8: string[]` — ordered card IDs; populated via `syncRankedFromAlways()` when leaving `/sort`
+- `choices: Choice[]` — 2–5 user-defined labels
+- `matrix: Record<cardId, Record<choiceId, SupportValue>>` — sparse; `SupportValue = 3 | 2 | 1 | -1 | "unknown"`
+- `language: "en" | "vi"` — **global language toggle lives here**, shared across both decks
 
-Actions return `{ ok, error? }` for validated mutations (`assignCard`, `addChoice`). The UI shows errors via `sonner` toasts.
+**Motivated Skills** (`store/useMotivatedSkillsStore.ts`):
+- `enjoymentBuckets: Record<cardId, EnjoymentBucket>` — `EnjoymentLevel | "unsorted"`
+- `proficiency: Record<cardId, ProficiencyLevel>` — sparse; `"expert" | "competent" | "learning"`
 
-**Always bucket cap (8 cards)** is enforced inside `assignCard` — don't duplicate that check in UI code.
+Actions return `{ ok, error? }` for validated mutations. The UI shows errors via `sonner` toasts. **Always bucket cap (8 cards)** is enforced inside `assignCard` — don't duplicate in UI code.
 
 ### Hydration pattern
 
-`persist` middleware + SSR means components that render persisted state must wait for hydration. The pattern throughout the codebase:
+`persist` middleware + SSR means every component that renders persisted state must wait:
 
 ```tsx
-const hydrated = useHydrated();  // from hooks/useHydrated.ts
+const hydrated = useHydrated();  // hooks/useHydrated.ts
 if (!hydrated) return <LoadingFallback />;
 ```
 
-The landing page (`/`) and instructions page don't need this — they render no persisted state.
+Route guards also run **after** hydration inside `useEffect` — never gate on store state before hydration, it causes redirect loops on reload.
 
-### Bilingual display (EN + VI simultaneously)
+### Route guards
 
-There is **no language toggle** by design. Every card shows: `en` (bold) + `vi` (muted subtitle) + `shortDescription` (Vietnamese blurb). The `ValueCard` component in `components/shared/` is the single source of truth for card rendering — reuse it everywhere (sort, rank, results).
+Each page checks prerequisites and redirects if unmet, always inside `useEffect` after `useHydrated()`:
 
-Card data schema (`data/careerValueCards.ts`): `{ id, order, en, vi, shortDescription, descriptionEn }` — 54 entries.
+- `/rank` → `/sort` if `always.length !== 8`
+- `/choices` → `/rank` if `rankedTop8.length !== 8`
+- `/results` → `/choices` if matrix incomplete
+- `/skills/proficiency` → `/skills/enjoyment` if `canContinueFromEnjoyment().ok === false`
+- `/skills/results` → `/skills/proficiency` if `isProficiencyComplete() === false`
+
+### i18n
+
+Language is stored in `useCardSortStore` (not URL/cookie). All components read it via:
+
+```ts
+const lang = useLanguage();   // i18n/useT.ts — reads from store
+const t = useT();             // returns full Dict for current language
+const dict = getDict(lang);   // i18n/index.ts — server-safe, no hooks
+```
+
+`Dict = typeof vi` — TypeScript infers the shape from `i18n/vi.ts`. Do **not** add `as const` to the vi/en objects; function values in the dict (e.g. `counter: (n) => \`${n} / 51\``) require mutable inference. Both `i18n/vi.ts` and `i18n/en.ts` must have identical structure. Adding a key to one requires adding it to the other.
+
+Top-level i18n namespaces: `common`, `languageToggle`, `progress`, `buckets`, `bucketShort`, `support`, `landing`, `instructions`, `sort`, `rank`, `choices`, `results`, `reset`, `insights`, `clipboard`, `skills`. The `skills` namespace covers the full Motivated Skills deck.
+
+### Bilingual display
+
+There is **no language toggle that hides text** — both languages show simultaneously on cards. Every `Card` has `en`, `vi`, `shortDescription` (VI description), `descriptionEn`. Use `pickCardDesc(card, lang)` from `@/i18n` to select the right description length. `ValueCard` in `components/shared/` is the single source of truth for card rendering.
 
 ### Desktop vs mobile interaction
 
-**Sort page** uses dual input modes simultaneously (not a mode toggle):
-- Desktop: `@dnd-kit/core` with `DndContext` in `SortPageClient`. Cards are `useDraggable`, buckets are `useDroppable`. `DragOverlay` renders the floating preview.
-- Mobile: tapping a card opens `AssignSheet` (a Radix `Dialog`) with 5 bucket buttons.
+Sort pages (both decks) run dual input modes simultaneously:
+- **Desktop:** `@dnd-kit/core` — `useDraggable`, `useDroppable`, `DragOverlay`
+- **Mobile:** tapping a card opens a Radix `Dialog` sheet with bucket buttons
 
-Both paths call the same `assignCard(cardId, bucket)` action. The `PointerSensor` has `activationConstraint: { distance: 6 }` so taps don't trigger drags.
+`PointerSensor` uses `activationConstraint: { distance: 6 }` so taps don't trigger drags.
 
-**Rank page** uses `@dnd-kit/sortable` for desktop drag handles plus up/down arrow buttons visible only on mobile (`sm:hidden`).
+**Rank page** uses `@dnd-kit/sortable` for drag handles + up/down arrow buttons (`sm:hidden`) for mobile.
 
-### Scoring (`lib/scoring.ts`)
+### Motivated Skills classification
 
-`computeChoiceStats(matrix, choiceId, rankedTop8)` returns `{ totalScore, unknownCount, supportCount, conflictCount }`. Key rule: **`"unknown"` is excluded from `totalScore`** (counted separately). Weighted-by-rank scoring is intentionally deferred to phase 2.
+`classifySkill(enjoyment, proficiency): SkillGroup` in `lib/motivatedSkillsScoring.ts`:
 
-`isMatrixComplete()` gates the `/results` transition. A complete matrix needs: `rankedTop8.length === 8`, `choices.length >= 2`, and every `matrix[cardId][choiceId]` defined.
+| enjoyment | proficiency | group |
+|---|---|---|
+| `like` | any | `"neutral"` |
+| `love` / `like-a-lot` | `expert` / `competent` | `"motivated"` |
+| `love` / `like-a-lot` | `learning` | `"developmental"` |
+| `dislike` / `hate` | `expert` / `competent` | `"burnout"` |
+| `dislike` / `hate` | `learning` | `"irrelevant"` |
+
+Results render in `SKILL_GROUPS_ORDERED = ["motivated","developmental","burnout","neutral","irrelevant"]` order. Enjoyment validation: each of 5 buckets needs ≥ `MIN_PER_ENJOYMENT_BUCKET` (3) cards. `canContinueFromEnjoyment()` returns typed error codes (`"UNSORTED_REMAINING"` or `"BUCKET_UNDERFILLED"`) for targeted toast messages.
+
+### Scoring (Career Values, `lib/scoring.ts`)
+
+`computeChoiceStats(matrix, choiceId, rankedTop8)` returns `{ totalScore, unknownCount, supportCount, conflictCount }`. Key rule: `"unknown"` is **excluded** from `totalScore`. `isMatrixComplete()` gates the `/results` transition.
+
+### Shared components
+
+**`ProgressHeader`** — props: `step` (2–6), `titleEn`, `titleVi`, `total? = 5`. `displayStep = step - 1`. Pass `total={3}` from Skills pages; Career Values pages omit it (default 5).
+
+**`StickyFooterActions`** — props: `backHref`, `continueDisabled`, `onContinueClick`, `continueLabel?`, `hint?`. Sticky footer with safe-area padding, `no-print`.
+
+**`ResetDialog`** — two modes:
+- *Legacy* (no controlled props): trigger-based, uses Career Values i18n defaults
+- *Controlled*: `open`, `onOpenChange`, `onConfirm`, plus optional `title?`, `body?`, `confirmLabel?` for deck-specific strings
+
+**`HomeButton`** — fixed top-left, hidden on `/`, `no-print`. Uses `useHydrated()` for stable pre-hydration render.
+
+### Deck registry
+
+`data/decks.ts` holds all 4 Knowdell decks. `status: "available" | "coming-soon"` controls the landing page badge and CTA. Decks 3 and 4 are `"coming-soon"`.
 
 ### UI primitives
 
-`components/ui/` contains hand-written shadcn-style primitives (Button, Card, Dialog, Select, Accordion, Progress, Input, Label). They follow standard shadcn patterns and depend on `@radix-ui/*` + `class-variance-authority` + `tailwind-merge`. If you add new UI primitives, stick to this pattern — do NOT introduce a different component library.
+`components/ui/` contains shadcn-style primitives (`Button`, `Card`, `Dialog`, `Select`, `Accordion`, `Progress`, `Input`, `Label`). They depend on `@radix-ui/*` + `class-variance-authority` + `tailwind-merge`. Do not introduce a different component library.
 
 ### Print CSS
 
-`globals.css` has a `@media print` block that hides anything with `no-print`. `ProgressHeader`, `StickyFooterActions`, and `ResultActions` all include `no-print` so browser print (Cmd/Ctrl+P) produces a clean summary. There is no PDF export — `window.print()` is intentional.
+`globals.css` has a `@media print` block. Add `no-print` to anything that should be hidden on print. `ProgressHeader`, `StickyFooterActions`, `HomeButton`, `LanguageToggle`, and action buttons all carry `no-print`. No PDF export — `window.print()` is intentional.
 
 ## Path conventions
 
-Import alias `@/*` maps to the project root (not `src/`). Example: `import { useCardSortStore } from "@/store/useCardSortStore"`.
+Import alias `@/*` maps to the project root (not `src/`).
 
-Folders:
-- `app/` — route files only (`page.tsx`, `layout.tsx`). Page files are thin wrappers around client components in `components/`.
-- `components/<page>/` — page-specific components (e.g. `sort/`, `choices/`).
-- `components/shared/` — reused across pages (`ValueCard`, `ProgressHeader`, `StickyFooterActions`, `ResetDialog`).
+- `app/` — route files only (`page.tsx`, `layout.tsx`). Thin wrappers around client components.
+- `components/<page>/` — page-specific (`sort/`, `rank/`, `choices/`, `results/`, `skills/`, `landing/`).
+- `components/shared/` — reused across pages.
 - `lib/` — pure functions (scoring, insights, validations, clipboard).
 - `hooks/` — `useHydrated`, `useIsMobile`, `useRouteGuard`.
+- `store/` — one Zustand store per deck.
+- `data/` — static card arrays and deck registry.
+- `types/` — `index.ts` (Career Values), `motivatedSkills.ts` (Motivated Skills).
+- `i18n/` — `vi.ts`, `en.ts`, `index.ts` (getDict, pickCardDesc), `useT.ts` (useT, useLanguage).
 
 ## Known constraints
 
 - ESLint rule `react/no-unescaped-entities` is disabled (`.eslintrc.json`) so Vietnamese/English text with inline quotes doesn't block builds.
-- `package.json` name is `knowdell-card-sorts` (lowercase) because the folder `KnowDellCardSorts` violates npm naming. Don't try to rebuild via `create-next-app .`.
+- `package.json` name is `knowdell-card-sorts` (lowercase). Don't try to rebuild via `create-next-app .`.
