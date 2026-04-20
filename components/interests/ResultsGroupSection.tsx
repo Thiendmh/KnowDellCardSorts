@@ -22,7 +22,6 @@ const GROUP_STYLE: Record<InterestGroup, string> = {
 interface Props {
   group: InterestGroup;
   cards: Card[];
-  rankedTopN: string[];
   exposure: Record<string, ExposureLevel>;
   defaultOpen?: boolean;
 }
@@ -30,7 +29,6 @@ interface Props {
 export function ResultsGroupSection({
   group,
   cards,
-  rankedTopN,
   exposure,
   defaultOpen,
 }: Props) {

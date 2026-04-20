@@ -70,7 +70,7 @@ export function ResultsActions({ state, cards }: Props) {
       await navigator.clipboard.writeText(text);
       toast.success(t.interests.results.actions.copied);
     } catch {
-      toast.error(t.common.loading);
+      toast.error(t.interests.results.actions.copyFailed);
     }
   }
 

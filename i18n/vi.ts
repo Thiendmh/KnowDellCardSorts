@@ -428,6 +428,7 @@ export const vi = {
         copied: "Đã sao chép!",
         print: "In / Lưu PDF",
         reset: "Làm lại",
+        copyFailed: "Sao chép thất bại — thử thủ công",
       },
       exposureBadge: (label: string) => `• ${label}`,
       rankIndex: (n: number) => `#${n}`,

@@ -429,6 +429,7 @@ export const en: Dict = {
         copied: "Copied!",
         print: "Print / Save PDF",
         reset: "Start over",
+        copyFailed: "Copy failed — please try manually",
       },
       exposureBadge: (label: string) => `• ${label}`,
       rankIndex: (n: number) => `#${n}`,

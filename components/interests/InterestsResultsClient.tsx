@@ -21,10 +21,16 @@ export function InterestsResultsClient() {
   const router = useRouter();
   const hydrated = useHydrated();
 
-  const state = useOccupationalInterestStore();
+  const interestBuckets = useOccupationalInterestStore((s) => s.interestBuckets);
+  const rankSize = useOccupationalInterestStore((s) => s.rankSize);
+  const rankedTopN = useOccupationalInterestStore((s) => s.rankedTopN);
+  const exposure = useOccupationalInterestStore((s) => s.exposure);
+  const currentStep = useOccupationalInterestStore((s) => s.currentStep);
+  const lastUpdatedAt = useOccupationalInterestStore((s) => s.lastUpdatedAt);
   const isExposureComplete = useOccupationalInterestStore(
     (s) => s.isExposureComplete,
   );
+  const state = { interestBuckets, rankSize, rankedTopN, exposure, currentStep, lastUpdatedAt };
 
   useEffect(() => {
     if (!hydrated) return;
@@ -38,7 +44,7 @@ export function InterestsResultsClient() {
       hydrated
         ? groupInterestsByCategory(state, occupationalInterestCards)
         : null,
-    [hydrated, state],
+    [hydrated, interestBuckets, rankedTopN, exposure],
   );
 
   if (!hydrated || !grouped) {
@@ -75,7 +81,6 @@ export function InterestsResultsClient() {
             key={g}
             group={g}
             cards={grouped[g]}
-            rankedTopN={state.rankedTopN}
             exposure={state.exposure}
             defaultOpen={g === "pursue-now"}
           />
