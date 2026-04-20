@@ -59,8 +59,8 @@ export const decks: Deck[] = [
     exampleEn: "Teaching · Technology · Healthcare · Arts & design",
     exampleVi: "Giảng dạy · Công nghệ · Y tế · Nghệ thuật & thiết kế",
     icon: Palette,
-    href: "#",
-    status: "coming-soon",
+    href: "/interests",
+    status: "available",
     accent: "from-amber-500/10 to-amber-500/0 border-amber-300",
   },
   {
