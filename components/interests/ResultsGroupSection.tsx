@@ -76,8 +76,8 @@ export function ResultsGroupSection({
                 return (
                   <div key={card.id} className="flex items-start gap-2">
                     {group === "pursue-now" && (
-                      <span className="mt-3 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-semibold text-white">
-                        {rankedTopN.indexOf(card.id) + 1}
+                      <span className="shrink-0 text-xs text-muted-foreground">
+                        {t.interests.results.rankIndex(idx + 1)}
                       </span>
                     )}
                     <div className="min-w-0 flex-1">
