@@ -314,4 +314,143 @@ export const en: Dict = {
       header: "MOTIVATED SKILLS — RESULTS",
     },
   },
+
+  interests: {
+    common: {
+      deckName: "Sở thích nghề nghiệp",
+      deckNameEn: "Occupational Interests",
+    },
+    landing: {
+      title: "Khám phá sở thích nghề nghiệp",
+      titleEn: "Explore your occupational interests",
+      body:
+        "Sort 52 occupations by how much they interest you, rank your top picks, rate your exposure to each, and see which to pursue, explore, or skip.",
+      stepsTitle: "You'll go through 4 steps",
+      step1Label: "Sort",
+      step1Body: "Split the 52 occupation cards across 5 interest levels.",
+      step2Label: "Rank",
+      step2Body: "Pick 3, 5, or 8 top interests and put them in order.",
+      step3Label: "Exposure",
+      step3Body: "Rate how much contact you've had with the top-interest cards.",
+      step4Label: "Results",
+      step4Body: "See four recommended groups and what to do next.",
+      cta: "Get started",
+      timeHint: "Takes about 15–20 minutes",
+    },
+    interestLevels: {
+      unsorted: { label: "Unsorted", short: "Unsorted" },
+      "very-high": { label: "Very High Interest", short: "Very High" },
+      high: { label: "High Interest", short: "High" },
+      medium: { label: "Medium Interest", short: "Medium" },
+      low: { label: "Low Interest", short: "Low" },
+      none: { label: "No Interest", short: "None" },
+    },
+    exposureLevels: {
+      experienced: {
+        label: "Direct experience",
+        description: "You've done or practised this work yourself.",
+      },
+      explored: {
+        label: "Some exploration",
+        description: "You've read, asked, or observed — but not tried it.",
+      },
+      none: {
+        label: "No exposure",
+        description: "You don't yet have concrete information about this work.",
+      },
+    },
+    groups: {
+      "pursue-now": {
+        label: "Pursue Now",
+        description:
+          "Your top picks — prioritise time and concrete action here.",
+      },
+      "explore-deep": {
+        label: "Explore Deeply",
+        description:
+          "You're interested and have some exposure — dig deeper to decide.",
+      },
+      consider: {
+        label: "Consider",
+        description:
+          "You're interested but haven't been exposed — try shadowing, interviewing, or reading before committing.",
+      },
+      skip: {
+        label: "Skip",
+        description: "Low interest — you can deprioritise these.",
+      },
+    },
+    sort: {
+      title: "Phân loại theo mức độ quan tâm",
+      titleEn: "Sort by interest level",
+      instruction:
+        "Drag each occupation card into one of the 5 columns. On mobile, tap the card to pick.",
+      unsortedLabel: "Unsorted",
+      counter: (sorted: number, total: number) => `${sorted} / ${total}`,
+      toastUnsorted: (n: number) => `${n} cards still unsorted.`,
+      toastBucketUnderfilled: (bucket: string, need: number) =>
+        `Bucket "${bucket}" needs ${need} more cards.`,
+      hintReady: "All sorted — ready to rank.",
+    },
+    rank: {
+      title: "Xếp hạng nghề quan tâm nhất",
+      titleEn: "Rank your top interests",
+      instruction:
+        "Choose how many top picks you want to rank, then drag (or use arrows on mobile) to order them.",
+      sizeSelectLabel: "Number of top picks",
+      sizeOption: (n: number) => `Top ${n}`,
+      sizeDisabledHint: (available: number) =>
+        `You need at least ${available} cards in "Very High Interest" to pick this.`,
+      sizeAutoAdjusted: (n: number) =>
+        `Adjusted to Top ${n} because "Very High" doesn't have enough cards.`,
+      topZoneLabel: (n: number) => `Your top ${n}`,
+      restZoneLabel: "Other cards (Very High Interest)",
+      incomplete: (need: number) => `Rank ${need} more card(s) into Top.`,
+    },
+    exposure: {
+      title: "Mức độ tiếp xúc",
+      titleEn: "Exposure level",
+      instruction:
+        "For each card in your 3 top-interest buckets, say how much exposure you've had.",
+      counter: (done: number, total: number) => `${done} / ${total} rated`,
+      sectionHeader: (bucketLabel: string, count: number) =>
+        `${bucketLabel} (${count})`,
+      toastIncomplete: (n: number) => `${n} cards still need an exposure rating.`,
+    },
+    results: {
+      title: "Kết quả sở thích nghề nghiệp",
+      titleEn: "Your occupational interests",
+      subtitle:
+        "Four recommended groups to help you decide what to pursue, explore, consider, or skip.",
+      countBadge: (n: number) => `${n} cards`,
+      emptyGroup: "No cards in this group.",
+      actions: {
+        copy: "Copy",
+        copied: "Copied!",
+        print: "Print / Save PDF",
+        reset: "Start over",
+      },
+      exposureBadge: (label: string) => `• ${label}`,
+      rankIndex: (n: number) => `#${n}`,
+    },
+    insights: {
+      headline: (pursueN: number, exploreN: number) =>
+        `You have ${pursueN} priority picks and ${exploreN} to explore deeply.`,
+      tipExperiencedTop: (n: number) =>
+        `You already have direct experience in ${n} top-interest picks — leverage your existing network.`,
+      tipUntriedTop: (n: number) =>
+        `${n} of your top interests are untried — consider shadowing for a day or interviewing someone in the field.`,
+      tipBackupDeep: (n: number) =>
+        `${n} "medium" options already have exposure — they might be solid backups.`,
+    },
+    reset: {
+      title: "Start this deck over?",
+      body: "This clears your interest sort, ranking, and exposure ratings for the Occupational Interests deck. The other two decks are untouched.",
+      confirm: "Start over",
+      cancel: "Cancel",
+    },
+    clipboard: {
+      header: "OCCUPATIONAL INTERESTS / KHÁM PHÁ SỞ THÍCH NGHỀ NGHIỆP",
+    },
+  },
 };

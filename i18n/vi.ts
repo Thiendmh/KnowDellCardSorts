@@ -313,6 +313,145 @@ export const vi = {
       header: "BỘ THẺ MOTIVATED SKILLS — KẾT QUẢ",
     },
   },
+
+  interests: {
+    common: {
+      deckName: "Sở thích nghề nghiệp",
+      deckNameEn: "Occupational Interests",
+    },
+    landing: {
+      title: "Khám phá sở thích nghề nghiệp",
+      titleEn: "Explore your occupational interests",
+      body:
+        "Sắp xếp 52 nghề nghiệp theo mức độ quan tâm, xếp hạng top lựa chọn, đánh giá mức độ tiếp xúc, và nhận gợi ý xem nên theo đuổi, khám phá hay bỏ qua điều gì.",
+      stepsTitle: "Bạn sẽ đi qua 4 bước",
+      step1Label: "Phân loại",
+      step1Body: "Chia 52 thẻ nghề nghiệp vào 5 mức độ quan tâm.",
+      step2Label: "Xếp hạng",
+      step2Body: "Chọn 3, 5 hoặc 8 nghề quan tâm nhất và xếp thứ tự.",
+      step3Label: "Tiếp xúc",
+      step3Body: "Đánh giá mức độ bạn đã tiếp xúc với nhóm nghề quan tâm.",
+      step4Label: "Kết quả",
+      step4Body: "Xem 4 nhóm gợi ý và bước tiếp theo cho bạn.",
+      cta: "Bắt đầu",
+      timeHint: "Thời lượng: ~15–20 phút",
+    },
+    interestLevels: {
+      unsorted: { label: "Chưa phân loại", short: "Chưa phân loại" },
+      "very-high": { label: "Rất quan tâm", short: "Rất quan tâm" },
+      high: { label: "Quan tâm", short: "Quan tâm" },
+      medium: { label: "Tạm ổn", short: "Tạm ổn" },
+      low: { label: "Ít quan tâm", short: "Ít quan tâm" },
+      none: { label: "Không quan tâm", short: "Không" },
+    },
+    exposureLevels: {
+      experienced: {
+        label: "Có trải nghiệm trực tiếp",
+        description: "Bạn đã từng làm hoặc thực hành công việc này.",
+      },
+      explored: {
+        label: "Có tìm hiểu",
+        description: "Bạn đã đọc, hỏi hoặc quan sát, nhưng chưa tự trải nghiệm.",
+      },
+      none: {
+        label: "Chưa tiếp xúc",
+        description: "Bạn chưa có thông tin cụ thể về công việc này.",
+      },
+    },
+    groups: {
+      "pursue-now": {
+        label: "Theo đuổi ngay",
+        description:
+          "Những lựa chọn hàng đầu của bạn — ưu tiên hành động và đầu tư thời gian.",
+      },
+      "explore-deep": {
+        label: "Khám phá sâu",
+        description:
+          "Bạn quan tâm và đã có chút tiếp xúc — hãy đi sâu hơn để quyết định.",
+      },
+      consider: {
+        label: "Cân nhắc",
+        description:
+          "Bạn quan tâm nhưng chưa tiếp xúc — thử shadow, phỏng vấn người trong nghề hoặc đọc kỹ trước khi cam kết.",
+      },
+      skip: {
+        label: "Bỏ qua",
+        description: "Ít quan tâm — có thể loại khỏi danh sách cân nhắc.",
+      },
+    },
+    sort: {
+      title: "Phân loại theo mức độ quan tâm",
+      titleEn: "Sort by interest level",
+      instruction:
+        "Kéo mỗi thẻ nghề nghiệp vào một trong 5 cột. Trên di động, nhấn vào thẻ để chọn.",
+      unsortedLabel: "Chưa phân loại",
+      counter: (sorted: number, total: number) => `${sorted} / ${total}`,
+      toastUnsorted: (n: number) => `Còn ${n} thẻ chưa phân loại.`,
+      toastBucketUnderfilled: (bucket: string, need: number) =>
+        `Cột "${bucket}" cần thêm ${need} thẻ nữa.`,
+      hintReady: "Đã xong — sẵn sàng sang bước xếp hạng.",
+    },
+    rank: {
+      title: "Xếp hạng nghề quan tâm nhất",
+      titleEn: "Rank your top interests",
+      instruction:
+        "Chọn số lượng top bạn muốn xếp hạng, sau đó kéo thả (hoặc dùng mũi tên trên di động) để sắp xếp.",
+      sizeSelectLabel: "Số lượng top",
+      sizeOption: (n: number) => `Top ${n}`,
+      sizeDisabledHint: (available: number) =>
+        `Cần có ít nhất ${available} thẻ ở "Rất quan tâm" để chọn số này.`,
+      sizeAutoAdjusted: (n: number) =>
+        `Đã điều chỉnh về Top ${n} vì nhóm "Rất quan tâm" không đủ thẻ.`,
+      topZoneLabel: (n: number) => `Top ${n} của bạn`,
+      restZoneLabel: "Các thẻ còn lại (Rất quan tâm)",
+      incomplete: (need: number) => `Cần xếp thêm ${need} thẻ vào Top.`,
+    },
+    exposure: {
+      title: "Mức độ tiếp xúc",
+      titleEn: "Exposure level",
+      instruction:
+        "Với từng nghề trong 3 nhóm quan tâm hàng đầu, cho biết bạn đã tiếp xúc đến đâu.",
+      counter: (done: number, total: number) => `${done} / ${total} thẻ đã đánh`,
+      sectionHeader: (bucketLabel: string, count: number) =>
+        `${bucketLabel} (${count})`,
+      toastIncomplete: (n: number) => `Còn ${n} thẻ chưa đánh giá tiếp xúc.`,
+    },
+    results: {
+      title: "Kết quả sở thích nghề nghiệp",
+      titleEn: "Your occupational interests",
+      subtitle:
+        "Bốn nhóm gợi ý giúp bạn quyết định theo đuổi, khám phá sâu, cân nhắc hay bỏ qua.",
+      countBadge: (n: number) => `${n} thẻ`,
+      emptyGroup: "Không có thẻ trong nhóm này.",
+      actions: {
+        copy: "Sao chép",
+        copied: "Đã sao chép!",
+        print: "In / Lưu PDF",
+        reset: "Làm lại",
+      },
+      exposureBadge: (label: string) => `• ${label}`,
+      rankIndex: (n: number) => `#${n}`,
+    },
+    insights: {
+      headline: (pursueN: number, exploreN: number) =>
+        `Bạn có ${pursueN} nghề ưu tiên và ${exploreN} nghề nên khám phá sâu.`,
+      tipExperiencedTop: (n: number) =>
+        `Bạn đã có trải nghiệm ở ${n} nghề top — hãy tận dụng mạng lưới sẵn có.`,
+      tipUntriedTop: (n: number) =>
+        `Có ${n} nghề top bạn chưa từng tiếp xúc — thử shadow 1 ngày hoặc phỏng vấn người trong nghề.`,
+      tipBackupDeep: (n: number) =>
+        `${n} lựa chọn "tạm ổn" đã được bạn tìm hiểu — có thể là phương án dự phòng tốt.`,
+    },
+    reset: {
+      title: "Làm lại bộ thẻ này?",
+      body: "Thao tác này sẽ xoá phân loại, xếp hạng và đánh giá tiếp xúc của bộ Sở thích nghề nghiệp. Hai bộ thẻ còn lại không bị ảnh hưởng.",
+      confirm: "Làm lại",
+      cancel: "Huỷ",
+    },
+    clipboard: {
+      header: "KHÁM PHÁ SỞ THÍCH NGHỀ NGHIỆP / OCCUPATIONAL INTERESTS",
+    },
+  },
 };
 
 export type Dict = typeof vi;
