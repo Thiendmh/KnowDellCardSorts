@@ -77,15 +77,20 @@ export function RankPageClient() {
     router.push("/choices");
   }
 
+  const DECK_STYLE = {
+    "--deck-color": "#078a52",
+    "--deck-text-color": "#ffffff",
+  } as React.CSSProperties;
+
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={4}
           titleEn="Rank your top 8 from most to least important"
           titleVi="Xếp hạng 8 giá trị quan trọng nhất (1 = quan trọng nhất)"
         />
-        <div className="container max-w-3xl py-6 text-muted-foreground">
+        <div className="container max-w-3xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -93,7 +98,7 @@ export function RankPageClient() {
   }
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={4}
         titleEn="Rank your top 8 from most to least important"
@@ -128,7 +133,7 @@ export function RankPageClient() {
             </div>
           </SortableContext>
         </DndContext>
-        <p className="mt-4 text-sm text-muted-foreground">{t.rank.tip}</p>
+        <p className="mt-4 text-sm text-clay-silver">{t.rank.tip}</p>
       </section>
 
       <StickyFooterActions

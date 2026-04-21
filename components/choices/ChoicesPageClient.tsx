@@ -46,15 +46,20 @@ export function ChoicesPageClient() {
     router.push("/results");
   }
 
+  const DECK_STYLE = {
+    "--deck-color": "#078a52",
+    "--deck-text-color": "#ffffff",
+  } as React.CSSProperties;
+
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={5}
           titleEn="Compare your choices"
           titleVi="So sánh các lựa chọn"
         />
-        <div className="container max-w-5xl py-6 text-muted-foreground">
+        <div className="container max-w-5xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -69,7 +74,7 @@ export function ChoicesPageClient() {
         : t.choices.matrixAllFilled;
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={5}
         titleEn="Compare your choices"
@@ -82,7 +87,7 @@ export function ChoicesPageClient() {
         </div>
         <div>
           <h2 className="mb-2 text-lg font-semibold">{t.choices.section2}</h2>
-          <p className="mb-3 text-sm text-muted-foreground">
+          <p className="mb-3 text-sm text-clay-silver">
             {t.choices.section2Help} <strong>3</strong>, <strong>2</strong>,{" "}
             <strong>1</strong>, <strong>−1</strong>, <strong>?</strong>.
           </p>

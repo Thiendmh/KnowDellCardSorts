@@ -97,15 +97,20 @@ export function SortPageClient() {
     router.push("/rank");
   }
 
+  const DECK_STYLE = {
+    "--deck-color": "#078a52",
+    "--deck-text-color": "#ffffff",
+  } as React.CSSProperties;
+
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={3}
           titleEn="Sort your 54 career values"
           titleVi="Phân loại 54 giá trị nghề nghiệp"
         />
-        <div className="container max-w-6xl py-6 text-muted-foreground">
+        <div className="container max-w-6xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -121,7 +126,7 @@ export function SortPageClient() {
         : t.sort.tooMany(alwaysCount - ALWAYS_LIMIT);
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={3}
         titleEn="Sort your 54 career values"
