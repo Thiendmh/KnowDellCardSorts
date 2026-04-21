@@ -6,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import type { Card } from "@/types";
 import {
   ENJOYMENT_LEVELS,
@@ -15,13 +14,14 @@ import {
 } from "@/types/motivatedSkills";
 import { Undo2 } from "lucide-react";
 import { useT, useLanguage, pickCardDesc } from "@/i18n";
+import { cn } from "@/lib/utils";
 
-const COLOR: Record<EnjoymentLevel, string> = {
-  love: "bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border-emerald-300",
-  "like-a-lot": "bg-sky-100 hover:bg-sky-200 text-sky-900 border-sky-300",
-  like: "bg-amber-100 hover:bg-amber-200 text-amber-900 border-amber-300",
-  dislike: "bg-orange-100 hover:bg-orange-200 text-orange-900 border-orange-300",
-  hate: "bg-rose-100 hover:bg-rose-200 text-rose-900 border-rose-300",
+const LEVEL_STYLE: Record<EnjoymentLevel, string> = {
+  love:       "border-lemon-400 bg-[#fff8e6] text-lemon-700 hover:bg-lemon-400/30",
+  "like-a-lot": "border-lemon-400 bg-[#fff8e6] text-lemon-700 hover:bg-lemon-400/20",
+  like:       "border-clay-oat bg-white text-clay-black hover:bg-clay-oat-light",
+  dislike:    "border-clay-oat bg-white text-clay-black hover:bg-clay-oat-light",
+  hate:       "border-red-200 bg-[#fff0f0] text-red-800 hover:bg-red-100",
 };
 
 interface Props {
@@ -31,49 +31,43 @@ interface Props {
   onAssign: (bucket: EnjoymentBucket) => void;
 }
 
-export function EnjoymentAssignSheet({
-  card,
-  currentBucket,
-  onClose,
-  onAssign,
-}: Props) {
+export function EnjoymentAssignSheet({ card, currentBucket, onClose, onAssign }: Props) {
   const t = useT();
   const lang = useLanguage();
   return (
     <Dialog open={!!card} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent>
+      <DialogContent className="bg-clay-cream">
         {card && (
           <>
             <DialogHeader>
-              <DialogTitle>{card.en}</DialogTitle>
-              <p className="text-sm text-muted-foreground">{card.vi}</p>
-              <p className="text-xs text-muted-foreground">
-                {pickCardDesc(card, lang)}
-              </p>
+              <DialogTitle className="font-bold tracking-tight text-clay-black">
+                {card.en}
+              </DialogTitle>
+              <p className="text-sm text-clay-silver">{card.vi}</p>
+              <p className="text-xs text-clay-charcoal">{pickCardDesc(card, lang)}</p>
             </DialogHeader>
             <div className="grid grid-cols-1 gap-2">
               {ENJOYMENT_LEVELS.map((b) => (
                 <button
                   key={b}
                   onClick={() => onAssign(b)}
-                  className={`rounded-lg border-2 p-3 text-left transition-colors ${COLOR[b]} ${
-                    currentBucket === b ? "ring-2 ring-primary" : ""
-                  }`}
+                  className={cn(
+                    "clay-btn rounded-xl border p-3 text-left text-sm font-semibold transition-colors",
+                    LEVEL_STYLE[b],
+                    currentBucket === b && "ring-2 ring-offset-1 ring-[var(--deck-color,#fbbd41)]",
+                  )}
                 >
-                  <div className="font-semibold">
-                    {t.skills.enjoyment.buckets[b]}
-                  </div>
+                  {t.skills.enjoyment.buckets[b]}
                 </button>
               ))}
               {currentBucket && currentBucket !== "unsorted" && (
-                <Button
-                  variant="outline"
-                  className="mt-1"
+                <button
                   onClick={() => onAssign("unsorted")}
+                  className="clay-btn mt-1 flex items-center gap-2 rounded-xl border border-clay-oat px-4 py-2.5 text-sm font-medium text-clay-charcoal hover:bg-clay-oat-light"
                 >
-                  <Undo2 />
+                  <Undo2 className="h-4 w-4" />
                   {t.skills.enjoyment.assignSheetReturn}
-                </Button>
+                </button>
               )}
             </div>
           </>
