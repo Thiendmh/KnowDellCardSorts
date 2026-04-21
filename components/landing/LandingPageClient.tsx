@@ -12,8 +12,9 @@ export function LandingPageClient() {
   const lang = useLanguage();
   const hydrated = useHydrated();
   const setLanguage = useCardSortStore((s) => s.setLanguage);
-  const language = useCardSortStore((s) => s.language);
-  const current = hydrated ? language : "vi";
+  const current = hydrated ? lang : "vi";
+
+  if (!hydrated) return null;
 
   return (
     <main className="min-h-dvh bg-clay-cream">
