@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useT, useLanguage } from "@/i18n";
-import { Button } from "@/components/ui/button";
 import { ArrowRight, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Deck } from "@/data/decks";
@@ -14,63 +13,67 @@ interface DeckCardProps {
 export function DeckCard({ deck }: DeckCardProps) {
   const t = useT();
   const lang = useLanguage();
-  const Icon = deck.icon;
   const purpose = lang === "en" ? deck.purposeEn : deck.purposeVi;
-  const example = lang === "en" ? deck.exampleEn : deck.exampleVi;
   const available = deck.status === "available";
 
   return (
     <div
       className={cn(
-        "relative flex flex-col overflow-hidden rounded-xl border-2 bg-gradient-to-br p-5 transition-shadow",
-        deck.accent,
-        available ? "hover:shadow-md" : "opacity-80",
+        "relative flex flex-col overflow-hidden rounded-2xl border border-clay-oat bg-white p-5 shadow-clay",
+        available ? "transition-transform hover:-translate-y-0.5 hover:shadow-md" : "opacity-75",
       )}
     >
-      <div className="mb-3 flex items-start justify-between gap-3">
-        <div className="rounded-lg bg-background/80 p-2">
-          <Icon className="h-5 w-5 text-foreground" />
-        </div>
+      {/* Deck swatch bar */}
+      <div
+        className="absolute inset-x-0 top-0 h-[5px] rounded-t-2xl"
+        style={{ backgroundColor: deck.swatchColor }}
+      />
+
+      <div className="mt-2 mb-3 flex items-center justify-between">
         <span
-          className={cn(
-            "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold",
+          className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.5px]"
+          style={
             available
-              ? "bg-primary text-primary-foreground"
-              : "bg-muted text-muted-foreground",
-          )}
+              ? {
+                  backgroundColor: `${deck.swatchColor}20`,
+                  color: deck.swatchColor,
+                }
+              : { backgroundColor: "#eee9df", color: "#9f9b93" }
+          }
         >
-          {!available && <Lock className="h-3 w-3" />}
+          {!available && <Lock className="h-2.5 w-2.5" />}
           {available ? t.landing.available : t.landing.comingSoon}
         </span>
       </div>
 
-      <div>
-        <div className="text-lg font-semibold leading-tight">{deck.nameEn}</div>
-        <div className="text-sm text-muted-foreground">{deck.nameVi}</div>
+      <div className="mb-1 text-base font-bold leading-tight text-clay-black">
+        {deck.nameEn}
       </div>
+      <div className="mb-3 text-xs text-clay-silver">{deck.nameVi}</div>
 
-      <div className="mt-3 text-xs uppercase tracking-wide text-muted-foreground">
-        {t.landing.purposeLabel}
-      </div>
-      <p className="text-sm text-foreground/90">{purpose}</p>
+      <p className="flex-1 text-sm leading-relaxed text-clay-charcoal">{purpose}</p>
 
-      <div className="mt-3 text-xs uppercase tracking-wide text-muted-foreground">
-        {t.landing.deckExampleLabel}
-      </div>
-      <p className="text-xs text-muted-foreground">{example}</p>
-
-      <div className="mt-4 pt-1">
+      <div className="mt-4">
         {available ? (
-          <Button asChild size="sm" className="w-full">
-            <Link href={deck.href}>
-              {t.landing.tryNow}
-              <ArrowRight />
-            </Link>
-          </Button>
+          <Link
+            href={deck.href}
+            className="clay-btn flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold"
+            style={{
+              backgroundColor: deck.swatchColor,
+              color: deck.swatchTextColor,
+            }}
+          >
+            {t.landing.tryNow}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         ) : (
-          <Button size="sm" variant="outline" disabled className="w-full">
+          <button
+            disabled
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-clay-oat py-2.5 text-sm font-semibold text-clay-silver opacity-60 cursor-not-allowed"
+          >
+            <Lock className="h-3.5 w-3.5" />
             {t.landing.comingSoon}
-          </Button>
+          </button>
         )}
       </div>
     </div>

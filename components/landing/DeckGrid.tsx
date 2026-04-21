@@ -5,7 +5,7 @@ import { DeckCard } from "./DeckCard";
 
 export function DeckGrid() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {decks.map((d) => (
         <DeckCard key={d.id} deck={d} />
       ))}
