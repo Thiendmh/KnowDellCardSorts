@@ -74,8 +74,8 @@ export const decks: Deck[] = [
     exampleEn: "Gardening · Volunteering · Travel · Learning a language",
     exampleVi: "Làm vườn · Thiện nguyện · Du lịch · Học ngôn ngữ mới",
     icon: Mountain,
-    href: "#",
-    status: "coming-soon",
+    href: "/leisure",
+    status: "available",
     accent: "from-rose-500/10 to-rose-500/0 border-rose-300",
   },
 ];
