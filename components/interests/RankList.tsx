@@ -72,7 +72,7 @@ function SortableRow({
       className={cn("flex items-stretch gap-2", isDragging && "opacity-50")}
     >
       <button
-        className="hidden shrink-0 items-center justify-center rounded-md border bg-background px-2 text-muted-foreground hover:bg-accent sm:flex"
+        className="hidden shrink-0 items-center justify-center rounded-md border bg-clay-cream px-2 text-clay-silver hover:bg-clay-oat-light sm:flex"
         aria-label={t.rank.dragReorder}
         {...attributes}
         {...listeners}
@@ -161,9 +161,9 @@ export function RankList({
             <p className="mb-2 text-sm font-medium text-foreground">
               {t.interests.rank.topZoneLabel(rankSize)}
             </p>
-            <div className="space-y-2 rounded-lg border-2 border-primary/30 bg-primary/5 p-3">
+            <div className="space-y-2 rounded-lg border-2 border-clay-oat bg-clay-oat-light/40 p-3">
               {topIds.length === 0 && (
-                <p className="py-4 text-center text-sm text-muted-foreground">
+                <p className="py-4 text-center text-sm text-clay-silver">
                   {t.interests.rank.incomplete(rankSize)}
                 </p>
               )}
@@ -190,10 +190,10 @@ export function RankList({
           {/* Rest zone */}
           {restIds.length > 0 && (
             <div>
-              <p className="mb-2 text-sm font-medium text-muted-foreground">
+              <p className="mb-2 text-sm font-medium text-clay-silver">
                 {t.interests.rank.restZoneLabel}
               </p>
-              <div className="space-y-2 rounded-lg border bg-muted/30 p-3">
+              <div className="space-y-2 rounded-lg border bg-clay-oat-light/30 p-3">
                 {restIds.map((id, idx) => {
                   const card = cardMap.get(id);
                   if (!card) return null;

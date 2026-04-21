@@ -41,7 +41,7 @@ export function ChoiceList() {
 
   return (
     <div className="space-y-3">
-      <div className="text-sm text-muted-foreground">{t.choices.listHelp}</div>
+      <div className="text-sm text-clay-silver">{t.choices.listHelp}</div>
 
       <div className="flex gap-2">
         <Input
@@ -130,7 +130,7 @@ export function ChoiceList() {
         ))}
       </ul>
 
-      <div className="text-xs text-muted-foreground">
+      <div className="text-xs text-clay-silver">
         {choices.length} / 5 {t.choices.countSuffix}
         {choices.length < 2 && (
           <span className="ml-2 text-destructive">

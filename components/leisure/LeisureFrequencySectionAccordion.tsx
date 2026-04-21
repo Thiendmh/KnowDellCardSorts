@@ -32,7 +32,7 @@ export function LeisureFrequencySectionAccordion({ bucket, cards, frequency, onC
             <span className="font-semibold">
               {t.leisure.frequency.sectionHeader(bucketLabel, count)}
             </span>
-            <span className="ml-4 shrink-0 text-xs text-muted-foreground">
+            <span className="ml-4 shrink-0 text-xs text-clay-silver">
               {doneCount} / {count}
             </span>
           </div>

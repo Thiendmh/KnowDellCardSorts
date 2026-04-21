@@ -26,7 +26,7 @@ export function ComparisonTable() {
   return (
     <div className="overflow-x-auto rounded-lg border">
       <table className="min-w-full">
-        <thead className="bg-muted/50">
+        <thead className="bg-clay-oat-light/50">
           <tr>
             <th className="p-3 text-left text-xs font-semibold uppercase tracking-wide">
               {t.results.colChoice}
@@ -54,7 +54,7 @@ export function ComparisonTable() {
                   "p-3 text-right font-mono text-base",
                   stats.totalScore === maxScore &&
                     maxScore > 0 &&
-                    "font-bold text-primary",
+                    "font-bold text-matcha-600",
                 )}
               >
                 {stats.totalScore}

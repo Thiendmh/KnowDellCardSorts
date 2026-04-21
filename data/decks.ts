@@ -14,7 +14,6 @@ export interface Deck {
   icon: LucideIcon;
   href: string;
   status: DeckStatus;
-  accent: string;
   swatchColor: string;
   swatchTextColor: string;
 }
@@ -31,7 +30,6 @@ export const decks: Deck[] = [
     icon: Compass,
     href: "/instructions",
     status: "available",
-    accent: "from-emerald-500/10 to-emerald-500/0 border-emerald-300",
     swatchColor: "#078a52",
     swatchTextColor: "#ffffff",
   },
@@ -46,7 +44,6 @@ export const decks: Deck[] = [
     icon: Sparkles,
     href: "/skills",
     status: "available",
-    accent: "from-sky-500/10 to-sky-500/0 border-sky-300",
     swatchColor: "#fbbd41",
     swatchTextColor: "#000000",
   },
@@ -61,7 +58,6 @@ export const decks: Deck[] = [
     icon: Palette,
     href: "/interests",
     status: "available",
-    accent: "from-amber-500/10 to-amber-500/0 border-amber-300",
     swatchColor: "#43089f",
     swatchTextColor: "#ffffff",
   },
@@ -76,7 +72,6 @@ export const decks: Deck[] = [
     icon: Mountain,
     href: "/leisure",
     status: "available",
-    accent: "from-rose-500/10 to-rose-500/0 border-rose-300",
     swatchColor: "#fc7981",
     swatchTextColor: "#ffffff",
   },

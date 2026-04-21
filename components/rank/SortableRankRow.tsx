@@ -48,7 +48,7 @@ export function SortableRankRow({
       className={cn("flex items-stretch gap-2", isDragging && "opacity-50")}
     >
       <button
-        className="hidden shrink-0 items-center justify-center rounded-md border bg-background px-2 text-muted-foreground hover:bg-accent sm:flex"
+        className="hidden shrink-0 items-center justify-center rounded-md border bg-clay-cream px-2 text-clay-silver hover:bg-clay-oat-light sm:flex"
         aria-label={t.rank.dragReorder}
         {...attributes}
         {...listeners}

@@ -54,11 +54,11 @@ export function ResultsGroupSection({
           </div>
         </AccordionTrigger>
         <AccordionContent className="px-4 pb-4">
-          <p className="mb-3 text-sm text-muted-foreground">
+          <p className="mb-3 text-sm text-clay-silver">
             {meta.description}
           </p>
           {cards.length === 0 ? (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-clay-silver">
               {t.interests.results.emptyGroup}
             </p>
           ) : (
@@ -74,14 +74,14 @@ export function ResultsGroupSection({
                 return (
                   <div key={card.id} className="flex items-start gap-2">
                     {group === "pursue-now" && (
-                      <span className="shrink-0 text-xs text-muted-foreground">
+                      <span className="shrink-0 text-xs text-clay-silver">
                         {t.interests.results.rankIndex(idx + 1)}
                       </span>
                     )}
                     <div className="min-w-0 flex-1">
                       <ValueCard card={card} compact>
                         {showExposure && exposureLabel && (
-                          <span className="shrink-0 text-xs text-muted-foreground">
+                          <span className="shrink-0 text-xs text-clay-silver">
                             {t.interests.results.exposureBadge(exposureLabel)}
                           </span>
                         )}

@@ -60,10 +60,10 @@ export function InterestsLandingClient() {
                 className="flex flex-col rounded-lg border bg-white p-4"
               >
                 <div className="flex items-center gap-2">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--deck-color)_15%,transparent)] text-sm font-semibold text-[var(--deck-color)]">
                     {i + 1}
                   </span>
-                  <Icon className="h-4 w-4 text-primary" />
+                  <Icon className="h-4 w-4 text-[var(--deck-color)]" />
                 </div>
                 <div className="mt-2 font-semibold">{s.label}</div>
                 <p className="mt-1 text-sm text-clay-silver">{s.body}</p>

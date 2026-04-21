@@ -19,7 +19,7 @@ export function TopValuesList() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-clay-silver">
           {t.results.top3}
         </h3>
         <div className="grid gap-3 sm:grid-cols-3">
@@ -31,7 +31,7 @@ export function TopValuesList() {
         </div>
       </div>
       <div>
-        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-clay-silver">
           {t.results.ranks48}
         </h3>
         <div className="grid gap-2 sm:grid-cols-2">

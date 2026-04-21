@@ -23,12 +23,12 @@ export function LeisureResultsInsights({ state, cards }: Props) {
   }
 
   return (
-    <div className="rounded-lg border bg-muted/40 p-4">
+    <div className="rounded-lg border bg-clay-oat-light/60 p-4">
       <p className="font-medium">
         {t.leisure.insights.headline(ins.priorityCount, ins.keepActiveCount)}
       </p>
       {tips.length > 0 && (
-        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-clay-silver">
           {tips.map((tip, i) => (
             <li key={i}>{tip}</li>
           ))}

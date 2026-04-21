@@ -26,12 +26,12 @@ export function ResultsInsights({ state, cards }: Props) {
   }
 
   return (
-    <div className="rounded-lg border bg-muted/40 p-4">
+    <div className="rounded-lg border bg-clay-oat-light/60 p-4">
       <p className="font-medium">
         {t.interests.insights.headline(ins.pursueNowCount, ins.exploreDeepCount)}
       </p>
       {tips.length > 0 && (
-        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-clay-silver">
           {tips.map((tip, i) => (
             <li key={i}>{tip}</li>
           ))}

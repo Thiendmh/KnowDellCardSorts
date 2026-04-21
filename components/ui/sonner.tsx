@@ -10,7 +10,7 @@ export function Toaster() {
       closeButton
       toastOptions={{
         classNames: {
-          toast: "bg-background border shadow-lg",
+          toast: "bg-clay-cream border shadow-lg",
         },
       }}
     />

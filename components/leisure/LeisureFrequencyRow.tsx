@@ -15,7 +15,7 @@ interface Props {
 export function LeisureFrequencyRow({ card, selected, onChange }: Props) {
   const t = useT();
   return (
-    <div className="rounded-lg border bg-background p-3">
+    <div className="rounded-lg border bg-clay-cream p-3">
       <ValueCard card={card} compact />
       <div className="mt-3 grid grid-cols-3 gap-2">
         {FREQUENCY_LEVELS.map((lvl) => {
@@ -29,8 +29,8 @@ export function LeisureFrequencyRow({ card, selected, onChange }: Props) {
               className={cn(
                 "rounded-md border px-2 py-2 text-xs font-semibold transition-colors sm:text-sm",
                 active
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-slate-300 bg-white text-foreground hover:bg-slate-50",
+                  ? "border-[var(--deck-color)] bg-[var(--deck-color)] text-[var(--deck-text-color)]"
+                  : "border-clay-oat bg-white text-clay-charcoal hover:bg-clay-oat-light",
               )}
             >
               {t.leisure.frequencyLevels[lvl].label}

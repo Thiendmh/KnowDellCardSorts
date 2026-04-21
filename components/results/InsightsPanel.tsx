@@ -40,7 +40,7 @@ export function InsightsPanel() {
 
   if (insights.length === 0) {
     return (
-      <div className="rounded-md border border-dashed p-4 text-sm text-muted-foreground">
+      <div className="rounded-md border border-dashed p-4 text-sm text-clay-silver">
         {t.results.emptyInsights}
       </div>
     );

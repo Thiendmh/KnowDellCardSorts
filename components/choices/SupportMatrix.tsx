@@ -28,7 +28,7 @@ export function SupportMatrix() {
 
   if (choices.length < 2) {
     return (
-      <div className="rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">
+      <div className="rounded-md border border-dashed p-6 text-center text-sm text-clay-silver">
         {t.choices.emptyMatrix}
       </div>
     );
@@ -37,9 +37,9 @@ export function SupportMatrix() {
   return (
     <div className="overflow-x-auto rounded-lg border">
       <table className="min-w-full border-collapse">
-        <thead className="bg-muted/50">
+        <thead className="bg-clay-oat-light/50">
           <tr>
-            <th className="sticky left-0 z-10 min-w-[220px] bg-muted/50 p-3 text-left text-xs font-semibold uppercase tracking-wide">
+            <th className="sticky left-0 z-10 min-w-[220px] bg-clay-oat-light/50 p-3 text-left text-xs font-semibold uppercase tracking-wide">
               {t.choices.columnValue}
             </th>
             {choices.map((c) => (
@@ -58,14 +58,14 @@ export function SupportMatrix() {
             if (!card) return null;
             return (
               <tr key={cardId} className="border-t">
-                <td className="sticky left-0 z-10 bg-background p-3 align-top">
+                <td className="sticky left-0 z-10 bg-clay-cream p-3 align-top">
                   <div className="flex items-start gap-2">
                     <span
                       className={cn(
                         "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
                         idx < 3
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted",
+                          ? "bg-matcha-600 text-white"
+                          : "bg-clay-oat-light",
                       )}
                     >
                       {idx + 1}
@@ -74,7 +74,7 @@ export function SupportMatrix() {
                       <div className="text-sm font-semibold leading-tight">
                         {card.en}
                       </div>
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-xs text-clay-silver">
                         {card.vi}
                       </div>
                     </div>
@@ -96,7 +96,7 @@ export function SupportMatrix() {
                           className={cn(
                             "h-9",
                             value === undefined &&
-                              "border-destructive/60 text-muted-foreground",
+                              "border-destructive/60 text-clay-silver",
                           )}
                         >
                           <SelectValue placeholder="—" />
@@ -105,7 +105,7 @@ export function SupportMatrix() {
                           {SUPPORT_OPTIONS.map((opt) => (
                             <SelectItem key={opt.display} value={String(opt.value)}>
                               <span className="font-mono">{opt.display}</span>
-                              <span className="ml-2 text-xs text-muted-foreground">
+                              <span className="ml-2 text-xs text-clay-silver">
                                 {t.support[String(opt.value)]}
                               </span>
                             </SelectItem>

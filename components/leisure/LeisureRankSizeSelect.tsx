@@ -20,7 +20,7 @@ export function LeisureRankSizeSelect({ value, onChange, eligibleCount }: Props)
   const t = useT();
   return (
     <div className="flex items-center gap-2">
-      <label className="text-sm text-muted-foreground">
+      <label className="text-sm text-clay-silver">
         {t.leisure.rank.sizeSelectLabel}
       </label>
       <Select

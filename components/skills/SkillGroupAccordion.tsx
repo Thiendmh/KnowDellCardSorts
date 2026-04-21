@@ -44,7 +44,7 @@ export function SkillGroupAccordion({ group, cards, defaultOpen }: Props) {
             <div>
               <div className="text-base font-semibold">{meta.name}</div>
               {meta.name !== meta.nameEn && (
-                <div className="text-xs text-muted-foreground">
+                <div className="text-xs text-clay-silver">
                   {meta.nameEn}
                 </div>
               )}
@@ -55,11 +55,11 @@ export function SkillGroupAccordion({ group, cards, defaultOpen }: Props) {
           </div>
         </AccordionTrigger>
         <AccordionContent className="px-4 pb-4">
-          <p className="mb-3 text-sm text-muted-foreground">
+          <p className="mb-3 text-sm text-clay-silver">
             {meta.description}
           </p>
           {cards.length === 0 ? (
-            <p className="text-sm text-muted-foreground">—</p>
+            <p className="text-sm text-clay-silver">—</p>
           ) : (
             <div className="space-y-2">
               {cards.map((c) => (
