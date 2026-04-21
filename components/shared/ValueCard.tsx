@@ -27,28 +27,33 @@ export function ValueCard({
   return (
     <div
       className={cn(
-        "rounded-lg border bg-card p-3 shadow-sm",
-        emphasis && "border-primary ring-2 ring-primary/30 bg-primary/5",
+        "rounded-xl border border-clay-oat bg-white p-3 shadow-clay",
+        emphasis && "border-[var(--deck-color,#078a52)]",
         compact && "p-2",
         className,
       )}
+      style={
+        emphasis
+          ? {
+              boxShadow:
+                "color-mix(in srgb, var(--deck-color, #078a52) 20%, transparent) 0 0 0 3px",
+            }
+          : undefined
+      }
     >
       <div className="flex items-start gap-2">
         {typeof rank === "number" && (
           <span
-            className={cn(
-              "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
-              emphasis ? "bg-primary text-primary-foreground" : "bg-muted",
-            )}
+            className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-clay-black font-mono text-[10px] font-bold text-white"
           >
             {rank}
           </span>
         )}
         <div className="min-w-0 flex-1">
-          <div className="font-semibold leading-tight">{card.en}</div>
-          <div className="text-sm text-muted-foreground">{card.vi}</div>
+          <div className="font-bold leading-tight text-clay-black text-[13px]">{card.en}</div>
+          <div className="text-[11px] text-clay-silver">{card.vi}</div>
           {!compact && (
-            <div className="mt-1 text-xs text-muted-foreground">
+            <div className="mt-1 text-[10px] leading-[1.4] text-clay-charcoal">
               {description}
             </div>
           )}
