@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { occupationalInterestCards } from "@/data/occupationalInterestCards";
@@ -15,6 +16,11 @@ import { ResultsInsights } from "./ResultsInsights";
 import { ResultsGroupSection } from "./ResultsGroupSection";
 import { ResultsActions } from "./ResultsActions";
 import { useT } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#43089f",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
 
 export function InterestsResultsClient() {
   const t = useT();
@@ -49,14 +55,14 @@ export function InterestsResultsClient() {
 
   if (!hydrated || !grouped) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={5}
           total={4}
           titleEn={t.interests.results.titleEn}
           titleVi={t.interests.results.title}
         />
-        <div className="container max-w-4xl py-6 text-muted-foreground">
+        <div className="container max-w-4xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -64,7 +70,7 @@ export function InterestsResultsClient() {
   }
 
   return (
-    <main className="min-h-dvh pb-20 print:pb-0">
+    <main className="min-h-dvh bg-clay-cream pb-20 print:pb-0" style={DECK_STYLE}>
       <ProgressHeader
         step={5}
         total={4}
@@ -72,7 +78,7 @@ export function InterestsResultsClient() {
         titleVi={t.interests.results.title}
       />
       <div className="container max-w-4xl space-y-4 py-4">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-clay-silver">
           {t.interests.results.subtitle}
         </p>
         <ResultsInsights state={state} cards={occupationalInterestCards} />

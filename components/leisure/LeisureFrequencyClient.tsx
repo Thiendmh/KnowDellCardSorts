@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -15,6 +16,11 @@ import { StickyFooterActions } from "@/components/shared/StickyFooterActions";
 import { LeisureFrequencySectionAccordion } from "./LeisureFrequencySectionAccordion";
 import type { Card } from "@/types";
 import { useT } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#fc7981",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
 
 export function LeisureFrequencyClient() {
   const t = useT();
@@ -79,14 +85,14 @@ export function LeisureFrequencyClient() {
 
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={4}
           total={4}
           titleEn={t.leisure.frequency.titleEn}
           titleVi={t.leisure.frequency.title}
         />
-        <div className="container max-w-4xl py-6 text-muted-foreground">
+        <div className="container max-w-4xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -94,7 +100,7 @@ export function LeisureFrequencyClient() {
   }
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={4}
         total={4}
@@ -102,10 +108,10 @@ export function LeisureFrequencyClient() {
         titleVi={t.leisure.frequency.title}
       />
       <div className="container max-w-4xl space-y-4 py-4">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-clay-silver">
           {t.leisure.frequency.instruction}
         </p>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-clay-silver">
           {t.leisure.frequency.counter(doneCount, totalCards)}
         </p>
         {TOP_LEISURE_BUCKETS.map((b) => (

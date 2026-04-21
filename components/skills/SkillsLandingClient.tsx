@@ -1,11 +1,17 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ListChecks, Gauge, Grid3x3 } from "lucide-react";
 import { useT, useLanguage } from "@/i18n";
 
 const STEP_ICONS = [ListChecks, Gauge, Grid3x3];
+
+const DECK_STYLE = {
+  "--deck-color": "#fbbd41",
+  "--deck-text-color": "#000000",
+} as React.CSSProperties;
 
 export function SkillsLandingClient() {
   const t = useT();
@@ -20,18 +26,18 @@ export function SkillsLandingClient() {
   const titleSecondary = lang === "en" ? t.skills.intro.title : t.skills.intro.titleEn;
 
   return (
-    <main className="min-h-dvh">
+    <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
       <section className="container max-w-3xl py-12 sm:py-16">
-        <div className="text-xs uppercase tracking-wide text-muted-foreground">
+        <div className="text-xs uppercase tracking-wide text-clay-silver">
           {t.skills.common.deckNameEn} · {t.skills.common.deckName}
         </div>
         <h1 className="mt-2 text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
           {titlePrimary}
         </h1>
         {titlePrimary !== titleSecondary && (
-          <p className="mt-1 text-lg text-muted-foreground">{titleSecondary}</p>
+          <p className="mt-1 text-lg text-clay-silver">{titleSecondary}</p>
         )}
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-clay-silver">
           {t.skills.intro.body}
         </p>
 
@@ -44,7 +50,7 @@ export function SkillsLandingClient() {
             return (
               <li
                 key={i}
-                className="flex flex-col rounded-lg border bg-background p-4"
+                className="flex flex-col rounded-lg border bg-white p-4"
               >
                 <div className="flex items-center gap-2">
                   <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
@@ -53,7 +59,7 @@ export function SkillsLandingClient() {
                   <Icon className="h-4 w-4 text-primary" />
                 </div>
                 <div className="mt-2 font-semibold">{s.label}</div>
-                <p className="mt-1 text-sm text-muted-foreground">{s.body}</p>
+                <p className="mt-1 text-sm text-clay-silver">{s.body}</p>
               </li>
             );
           })}

@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { leisureActivityCards } from "@/data/leisureActivityCards";
@@ -15,6 +16,11 @@ import { LeisureResultsInsights } from "./LeisureResultsInsights";
 import { LeisureResultsGroupSection } from "./LeisureResultsGroupSection";
 import { LeisureResultsActions } from "./LeisureResultsActions";
 import { useT } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#fc7981",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
 
 export function LeisureResultsClient() {
   const t = useT();
@@ -49,14 +55,14 @@ export function LeisureResultsClient() {
 
   if (!hydrated || !grouped) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={5}
           total={4}
           titleEn={t.leisure.results.titleEn}
           titleVi={t.leisure.results.title}
         />
-        <div className="container max-w-4xl py-6 text-muted-foreground">
+        <div className="container max-w-4xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -64,7 +70,7 @@ export function LeisureResultsClient() {
   }
 
   return (
-    <main className="min-h-dvh pb-20 print:pb-0">
+    <main className="min-h-dvh bg-clay-cream pb-20 print:pb-0" style={DECK_STYLE}>
       <ProgressHeader
         step={5}
         total={4}
@@ -72,7 +78,7 @@ export function LeisureResultsClient() {
         titleVi={t.leisure.results.title}
       />
       <div className="container max-w-4xl space-y-4 py-4">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-clay-silver">
           {t.leisure.results.subtitle}
         </p>
         <LeisureResultsInsights state={state} cards={leisureActivityCards} />

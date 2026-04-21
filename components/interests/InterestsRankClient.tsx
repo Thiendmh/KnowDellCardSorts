@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -15,6 +16,11 @@ import { StickyFooterActions } from "@/components/shared/StickyFooterActions";
 import { RankSizeSelect } from "./RankSizeSelect";
 import { RankList } from "./RankList";
 import { useT } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#43089f",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
 
 export function InterestsRankClient() {
   const t = useT();
@@ -87,14 +93,14 @@ export function InterestsRankClient() {
 
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={3}
           total={4}
           titleEn={t.interests.rank.titleEn}
           titleVi={t.interests.rank.title}
         />
-        <div className="container max-w-6xl py-6 text-muted-foreground">
+        <div className="container max-w-6xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -102,7 +108,7 @@ export function InterestsRankClient() {
   }
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={3}
         total={4}
@@ -110,7 +116,7 @@ export function InterestsRankClient() {
         titleVi={t.interests.rank.title}
       />
       <div className="container max-w-4xl space-y-4 py-4">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-clay-silver">
           {t.interests.rank.instruction}
         </p>
         <RankSizeSelect

@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useMemo, useState } from "react";
 import {
   DndContext,
@@ -23,6 +24,11 @@ import { ValueCard } from "@/components/shared/ValueCard";
 import { ProgressHeader } from "@/components/shared/ProgressHeader";
 import { StickyFooterActions } from "@/components/shared/StickyFooterActions";
 import { useT } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#fbbd41",
+  "--deck-text-color": "#000000",
+} as React.CSSProperties;
 
 export function EnjoymentSortClient() {
   const t = useT();
@@ -114,14 +120,14 @@ export function EnjoymentSortClient() {
 
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={2}
           total={3}
           titleEn={t.skills.enjoyment.titleEn}
           titleVi={t.skills.enjoyment.titleVi}
         />
-        <div className="container max-w-6xl py-6 text-muted-foreground">
+        <div className="container max-w-6xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -135,7 +141,7 @@ export function EnjoymentSortClient() {
       : t.skills.enjoyment.subtitle;
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={2}
         total={3}

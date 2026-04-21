@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { motivatedSkillCards } from "@/data/motivatedSkillCards";
@@ -11,6 +12,11 @@ import { ProgressHeader } from "@/components/shared/ProgressHeader";
 import { SkillGroupAccordion } from "./SkillGroupAccordion";
 import { SkillsResultActions } from "./SkillsResultActions";
 import { useT, useLanguage } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#fbbd41",
+  "--deck-text-color": "#000000",
+} as React.CSSProperties;
 
 export function SkillsResultsClient() {
   const t = useT();
@@ -48,14 +54,14 @@ export function SkillsResultsClient() {
 
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={4}
           total={3}
           titleEn={t.skills.results.titleEn}
           titleVi={t.skills.results.titleVi}
         />
-        <div className="container max-w-3xl py-6 text-muted-foreground">
+        <div className="container max-w-3xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -66,7 +72,7 @@ export function SkillsResultsClient() {
     lang === "en" ? t.skills.results.titleEn : t.skills.results.titleVi;
 
   return (
-    <main className="min-h-dvh pb-16">
+    <main className="min-h-dvh bg-clay-cream pb-16" style={DECK_STYLE}>
       <ProgressHeader
         step={4}
         total={3}

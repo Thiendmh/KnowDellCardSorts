@@ -10,13 +10,13 @@ import { DraggableCard } from "@/components/sort/DraggableCard";
 import { cn } from "@/lib/utils";
 import { useT } from "@/i18n";
 
-const COLOR: Record<LeisureActivityBucket, string> = {
-  unsorted: "border-slate-300 bg-slate-50",
-  "do-often": "border-emerald-300 bg-emerald-50",
-  "want-more": "border-sky-300 bg-sky-50",
-  "used-to": "border-amber-300 bg-amber-50",
-  "never-tried": "border-purple-300 bg-purple-50",
-  "not-interested": "border-rose-300 bg-rose-50",
+const IS_TOP: Record<LeisureActivityBucket, boolean> = {
+  unsorted: false,
+  "do-often": true,
+  "want-more": true,
+  "used-to": false,
+  "never-tried": false,
+  "not-interested": false,
 };
 
 interface LeisureSortBucketColumnProps {
@@ -34,33 +34,47 @@ export function LeisureSortBucketColumn({
   const { isOver, setNodeRef } = useDroppable({ id: bucket });
   const isRegular = bucket !== "unsorted";
   const underfilled = isRegular && cards.length < MIN_PER_LEISURE_BUCKET;
+  const isTopBucket = IS_TOP[bucket];
+  const isNegative = bucket === "not-interested";
 
   return (
     <div
       ref={setNodeRef}
       className={cn(
-        "flex flex-col rounded-lg border-2 p-3 transition-colors",
-        COLOR[bucket],
-        isOver && "ring-2 ring-primary ring-offset-2",
+        "flex flex-col rounded-2xl border border-dashed border-clay-oat bg-white p-3 transition-colors shadow-clay",
+        isOver && "border-solid border-clay-oat bg-clay-cream",
       )}
     >
       <div className="mb-2 flex items-center justify-between">
-        <div className="font-semibold text-sm leading-tight">
+        <div
+          className="text-[11px] font-semibold uppercase tracking-[1px]"
+          style={{
+            color: isTopBucket
+              ? "var(--deck-color, #fc7981)"
+              : isNegative
+              ? "#c0272d"
+              : "#9f9b93",
+          }}
+        >
           {t.leisure.activityLevels[bucket].label}
         </div>
         <div
           className={cn(
-            "rounded-full bg-white px-2 py-0.5 text-xs font-semibold",
-            isRegular && !underfilled && "bg-emerald-500 text-white",
-            underfilled && "bg-destructive text-destructive-foreground",
+            "rounded-full px-2 py-0.5 text-[10px] font-bold",
+            underfilled ? "bg-red-100 text-red-700" : !isRegular ? "bg-clay-oat-light text-clay-silver" : "",
           )}
+          style={
+            isRegular && !underfilled
+              ? { backgroundColor: "var(--deck-color, #fc7981)", color: "var(--deck-text-color, #ffffff)" }
+              : undefined
+          }
         >
           {cards.length}
         </div>
       </div>
-      <div className="flex-1 space-y-2 min-h-20">
+      <div className="min-h-20 flex-1 space-y-1.5">
         {cards.length === 0 ? (
-          <div className="flex items-center justify-center rounded border border-dashed border-slate-300 py-6 text-xs text-muted-foreground">
+          <div className="flex items-center justify-center rounded-xl border border-dashed border-clay-oat py-6 text-[11px] text-clay-silver">
             {t.leisure.sort.unsortedLabel}
           </div>
         ) : (

@@ -6,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import type { Card } from "@/types";
 import {
   LEISURE_ACTIVITY_LEVELS,
@@ -15,16 +14,14 @@ import {
 } from "@/types/leisureActivities";
 import { Undo2 } from "lucide-react";
 import { useT, useLanguage, pickCardDesc } from "@/i18n";
+import { cn } from "@/lib/utils";
 
-const COLOR: Record<LeisureActivityLevel, string> = {
-  "do-often":
-    "bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border-emerald-300",
-  "want-more": "bg-sky-100 hover:bg-sky-200 text-sky-900 border-sky-300",
-  "used-to": "bg-amber-100 hover:bg-amber-200 text-amber-900 border-amber-300",
-  "never-tried":
-    "bg-purple-100 hover:bg-purple-200 text-purple-900 border-purple-300",
-  "not-interested":
-    "bg-rose-100 hover:bg-rose-200 text-rose-900 border-rose-300",
+const LEVEL_STYLE: Record<LeisureActivityLevel, string> = {
+  "do-often":       "border-[#fc7981]/50 bg-[#fff0f2] text-[#c0272d] hover:bg-[#ffd7d9]",
+  "want-more":      "border-[#fc7981]/50 bg-[#fff0f2] text-[#c0272d] hover:bg-[#ffd7d9]",
+  "used-to":        "border-clay-oat bg-white text-clay-black hover:bg-clay-oat-light",
+  "never-tried":    "border-clay-oat bg-white text-clay-black hover:bg-clay-oat-light",
+  "not-interested": "border-red-200 bg-[#fff0f0] text-red-800 hover:bg-red-100",
 };
 
 interface Props {
@@ -44,39 +41,38 @@ export function LeisureAssignSheet({
   const lang = useLanguage();
   return (
     <Dialog open={!!card} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent>
+      <DialogContent className="bg-clay-cream">
         {card && (
           <>
             <DialogHeader>
-              <DialogTitle>{card.en}</DialogTitle>
-              <p className="text-sm text-muted-foreground">{card.vi}</p>
-              <p className="text-xs text-muted-foreground">
-                {pickCardDesc(card, lang)}
-              </p>
+              <DialogTitle className="font-bold tracking-tight text-clay-black">
+                {card.en}
+              </DialogTitle>
+              <p className="text-sm text-clay-silver">{card.vi}</p>
+              <p className="text-xs text-clay-charcoal">{pickCardDesc(card, lang)}</p>
             </DialogHeader>
             <div className="grid grid-cols-1 gap-2">
               {LEISURE_ACTIVITY_LEVELS.map((b) => (
                 <button
                   key={b}
                   onClick={() => onAssign(b)}
-                  className={`rounded-lg border-2 p-3 text-left transition-colors ${COLOR[b]} ${
-                    currentBucket === b ? "ring-2 ring-primary" : ""
-                  }`}
+                  className={cn(
+                    "clay-btn rounded-xl border p-3 text-left text-sm font-semibold transition-colors",
+                    LEVEL_STYLE[b],
+                    currentBucket === b && "ring-2 ring-offset-1 ring-[var(--deck-color,#fc7981)]",
+                  )}
                 >
-                  <div className="font-semibold">
-                    {t.leisure.activityLevels[b].label}
-                  </div>
+                  {t.leisure.activityLevels[b].label}
                 </button>
               ))}
               {currentBucket && currentBucket !== "unsorted" && (
-                <Button
-                  variant="outline"
-                  className="mt-1"
+                <button
                   onClick={() => onAssign("unsorted")}
+                  className="clay-btn mt-1 flex items-center gap-2 rounded-xl border border-clay-oat px-4 py-2.5 text-sm font-medium text-clay-charcoal hover:bg-clay-oat-light"
                 >
-                  <Undo2 />
+                  <Undo2 className="h-4 w-4" />
                   {t.leisure.sort.unsortedLabel}
-                </Button>
+                </button>
               )}
             </div>
           </>

@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -12,6 +13,11 @@ import { ProgressHeader } from "@/components/shared/ProgressHeader";
 import { StickyFooterActions } from "@/components/shared/StickyFooterActions";
 import { ProficiencyRow } from "./ProficiencyRow";
 import { useT } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#fbbd41",
+  "--deck-text-color": "#000000",
+} as React.CSSProperties;
 
 export function ProficiencyRateClient() {
   const t = useT();
@@ -67,20 +73,20 @@ export function ProficiencyRateClient() {
 
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={3}
           total={3}
           titleEn={t.skills.proficiency.titleEn}
           titleVi={t.skills.proficiency.titleVi}
         />
-        <div className="container max-w-3xl py-6 text-muted-foreground">{t.common.loading}</div>
+        <div className="container max-w-3xl py-6 text-clay-silver">{t.common.loading}</div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={3}
         total={3}
@@ -88,11 +94,11 @@ export function ProficiencyRateClient() {
         titleVi={t.skills.proficiency.titleVi}
       />
       <div className="container max-w-3xl py-4">
-        <div className="sticky top-0 z-10 -mx-4 mb-3 bg-background/95 px-4 py-2 backdrop-blur sm:mx-0 sm:rounded-lg sm:border sm:px-3">
+        <div className="sticky top-0 z-10 -mx-4 mb-3 bg-clay-cream/95 px-4 py-2 backdrop-blur sm:mx-0 sm:rounded-lg sm:border sm:px-3">
           <div className="text-sm font-semibold">
             {t.skills.proficiency.counter(ratedCount, total)}
           </div>
-          <p className="mt-0.5 text-xs text-muted-foreground">{t.skills.proficiency.subtitle}</p>
+          <p className="mt-0.5 text-xs text-clay-silver">{t.skills.proficiency.subtitle}</p>
         </div>
 
         <div className="space-y-6">
@@ -101,7 +107,7 @@ export function ProficiencyRateClient() {
             if (cards.length === 0) return null;
             return (
               <section key={lvl}>
-                <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-clay-silver">
                   {t.skills.proficiency.groupLabel(t.skills.enjoyment.buckets[lvl], cards.length)}
                 </h2>
                 <div className="space-y-2">

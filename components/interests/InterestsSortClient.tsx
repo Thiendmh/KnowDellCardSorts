@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useMemo, useState } from "react";
 import {
   DndContext,
@@ -23,6 +24,11 @@ import { ValueCard } from "@/components/shared/ValueCard";
 import { ProgressHeader } from "@/components/shared/ProgressHeader";
 import { StickyFooterActions } from "@/components/shared/StickyFooterActions";
 import { useT } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#43089f",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
 
 export function InterestsSortClient() {
   const t = useT();
@@ -115,14 +121,14 @@ export function InterestsSortClient() {
 
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={2}
           total={4}
           titleEn={t.interests.sort.titleEn}
           titleVi={t.interests.sort.title}
         />
-        <div className="container max-w-6xl py-6 text-muted-foreground">
+        <div className="container max-w-6xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -136,7 +142,7 @@ export function InterestsSortClient() {
       : t.interests.sort.instruction;
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={2}
         total={4}
@@ -150,7 +156,7 @@ export function InterestsSortClient() {
         onDragEnd={handleDragEnd}
       >
         <div className="container max-w-6xl space-y-4 py-4">
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-clay-silver">
             {t.interests.sort.counter(sortedCount, total)}
           </div>
           <InterestSortBucketColumn

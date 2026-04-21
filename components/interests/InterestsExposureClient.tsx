@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -15,6 +16,11 @@ import { StickyFooterActions } from "@/components/shared/StickyFooterActions";
 import { ExposureSectionAccordion } from "./ExposureSectionAccordion";
 import type { Card } from "@/types";
 import { useT } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#43089f",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
 
 export function InterestsExposureClient() {
   const t = useT();
@@ -79,14 +85,14 @@ export function InterestsExposureClient() {
 
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={4}
           total={4}
           titleEn={t.interests.exposure.titleEn}
           titleVi={t.interests.exposure.title}
         />
-        <div className="container max-w-4xl py-6 text-muted-foreground">
+        <div className="container max-w-4xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -94,7 +100,7 @@ export function InterestsExposureClient() {
   }
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={4}
         total={4}
@@ -102,10 +108,10 @@ export function InterestsExposureClient() {
         titleVi={t.interests.exposure.title}
       />
       <div className="container max-w-4xl space-y-4 py-4">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-clay-silver">
           {t.interests.exposure.instruction}
         </p>
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-clay-silver">
           {t.interests.exposure.counter(doneCount, totalCards)}
         </p>
         {TOP_INTEREST_BUCKETS.map((b) => (

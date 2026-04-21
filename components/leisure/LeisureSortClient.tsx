@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useMemo, useState } from "react";
 import {
   DndContext,
@@ -23,6 +24,11 @@ import { ValueCard } from "@/components/shared/ValueCard";
 import { ProgressHeader } from "@/components/shared/ProgressHeader";
 import { StickyFooterActions } from "@/components/shared/StickyFooterActions";
 import { useT } from "@/i18n";
+
+const DECK_STYLE = {
+  "--deck-color": "#fc7981",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
 
 export function LeisureSortClient() {
   const t = useT();
@@ -115,14 +121,14 @@ export function LeisureSortClient() {
 
   if (!hydrated) {
     return (
-      <main className="min-h-dvh">
+      <main className="min-h-dvh bg-clay-cream" style={DECK_STYLE}>
         <ProgressHeader
           step={2}
           total={4}
           titleEn={t.leisure.sort.titleEn}
           titleVi={t.leisure.sort.title}
         />
-        <div className="container max-w-6xl py-6 text-muted-foreground">
+        <div className="container max-w-6xl py-6 text-clay-silver">
           {t.common.loading}
         </div>
       </main>
@@ -136,7 +142,7 @@ export function LeisureSortClient() {
       : t.leisure.sort.instruction;
 
   return (
-    <main className="min-h-dvh pb-20">
+    <main className="min-h-dvh bg-clay-cream pb-20" style={DECK_STYLE}>
       <ProgressHeader
         step={2}
         total={4}
@@ -150,7 +156,7 @@ export function LeisureSortClient() {
         onDragEnd={handleDragEnd}
       >
         <div className="container max-w-6xl space-y-4 py-4">
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-clay-silver">
             {t.leisure.sort.counter(sortedCount, total)}
           </div>
           <LeisureSortBucketColumn
