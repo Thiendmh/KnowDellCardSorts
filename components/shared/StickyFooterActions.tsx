@@ -30,7 +30,7 @@ export function StickyFooterActions({
   };
 
   const continueClasses =
-    "clay-btn inline-flex min-w-36 items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold shadow-clay transition-colors disabled:cursor-not-allowed disabled:opacity-45";
+    "clay-btn inline-flex min-w-36 items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold shadow-clay transition-colors disabled:cursor-not-allowed disabled:opacity-[0.45]";
 
   const continueBtn = (
     <button
@@ -38,7 +38,7 @@ export function StickyFooterActions({
       disabled={continueDisabled}
       onClick={onContinueClick}
       className={continueClasses}
-      style={continueDisabled ? undefined : continueStyles}
+      style={continueStyles}
     >
       {label}
       <ArrowRight className="h-4 w-4" />
