@@ -44,7 +44,6 @@ export function LeisureResultsClient() {
       hydrated
         ? groupLeisureActivities(state, leisureActivityCards)
         : null,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [hydrated, activityBuckets, rankedTopN, frequency],
   );
 

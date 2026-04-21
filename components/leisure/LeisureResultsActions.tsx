@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Copy, Printer, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { useLeisureActivitiesStore } from "@/store/useLeisureActivitiesStore";
-import { leisureActivityCards } from "@/data/leisureActivityCards";
 import {
   buildLeisureClipboardText,
   type ClipboardStrings,
