@@ -24,6 +24,11 @@ import { StickyFooterActions } from "@/components/shared/StickyFooterActions";
 import { SortableRankRow } from "./SortableRankRow";
 import { useT } from "@/i18n";
 
+const DECK_STYLE = {
+  "--deck-color": "#078a52",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
+
 export function RankPageClient() {
   const t = useT();
   const hydrated = useHydrated();
@@ -76,11 +81,6 @@ export function RankPageClient() {
     setStep(5);
     router.push("/choices");
   }
-
-  const DECK_STYLE = {
-    "--deck-color": "#078a52",
-    "--deck-text-color": "#ffffff",
-  } as React.CSSProperties;
 
   if (!hydrated) {
     return (

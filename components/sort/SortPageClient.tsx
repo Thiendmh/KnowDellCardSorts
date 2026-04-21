@@ -23,6 +23,11 @@ import { ProgressHeader } from "@/components/shared/ProgressHeader";
 import { StickyFooterActions } from "@/components/shared/StickyFooterActions";
 import { useT } from "@/i18n";
 
+const DECK_STYLE = {
+  "--deck-color": "#078a52",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
+
 export function SortPageClient() {
   const t = useT();
   const hydrated = useHydrated();
@@ -96,11 +101,6 @@ export function SortPageClient() {
     setStep(4);
     router.push("/rank");
   }
-
-  const DECK_STYLE = {
-    "--deck-color": "#078a52",
-    "--deck-text-color": "#ffffff",
-  } as React.CSSProperties;
 
   if (!hydrated) {
     return (

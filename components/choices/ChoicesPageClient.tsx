@@ -13,6 +13,11 @@ import { isMatrixComplete } from "@/lib/scoring";
 import { toast } from "sonner";
 import { useT } from "@/i18n";
 
+const DECK_STYLE = {
+  "--deck-color": "#078a52",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
+
 export function ChoicesPageClient() {
   const t = useT();
   const hydrated = useHydrated();
@@ -45,11 +50,6 @@ export function ChoicesPageClient() {
     setStep(6);
     router.push("/results");
   }
-
-  const DECK_STYLE = {
-    "--deck-color": "#078a52",
-    "--deck-text-color": "#ffffff",
-  } as React.CSSProperties;
 
   if (!hydrated) {
     return (

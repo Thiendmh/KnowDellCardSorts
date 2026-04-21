@@ -16,6 +16,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useT } from "@/i18n";
 
+const DECK_STYLE = {
+  "--deck-color": "#078a52",
+  "--deck-text-color": "#ffffff",
+} as React.CSSProperties;
+
 export function ResultsPageClient() {
   const t = useT();
   const hydrated = useHydrated();
@@ -37,11 +42,6 @@ export function ResultsPageClient() {
     );
     if (!complete || choices.length < 2) router.replace("/choices");
   }, [hydrated, rankedTop8, choices, matrix, router]);
-
-  const DECK_STYLE = {
-    "--deck-color": "#078a52",
-    "--deck-text-color": "#ffffff",
-  } as React.CSSProperties;
 
   if (!hydrated) {
     return (

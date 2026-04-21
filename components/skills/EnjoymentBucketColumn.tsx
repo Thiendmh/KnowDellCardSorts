@@ -60,7 +60,7 @@ export function EnjoymentBucketColumn({
         <div
           className={cn(
             "rounded-full px-2 py-0.5 text-[10px] font-bold",
-            isRegular && !underfilled ? "text-white" : underfilled ? "bg-red-100 text-red-700" : "bg-clay-oat-light text-clay-silver",
+            underfilled ? "bg-red-100 text-red-700" : !isRegular ? "bg-clay-oat-light text-clay-silver" : "",
           )}
           style={
             isRegular && !underfilled
