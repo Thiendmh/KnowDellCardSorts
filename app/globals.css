@@ -5,25 +5,25 @@
 @layer base {
   :root {
     /* shadcn tokens remapped to Clay palette */
-    --background: 40 14% 97%;        /* #faf9f7 cream */
+    --background: 40 23% 97%;        /* #faf9f7 cream */
     --foreground: 0 0% 0%;           /* #000 */
     --card: 0 0% 100%;               /* #fff */
     --card-foreground: 0 0% 0%;      /* #000 */
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
-    --primary: 157 55% 28%;          /* #078a52 matcha-600 (fallback) */
+    --primary: 154 90% 28%;          /* #078a52 matcha-600 */
     --primary-foreground: 0 0% 100%;
-    --secondary: 38 28% 91%;         /* #eee9df oat-light */
+    --secondary: 40 31% 90%;         /* #eee9df oat-light */
     --secondary-foreground: 0 0% 0%;
-    --muted: 38 28% 91%;             /* #eee9df */
-    --muted-foreground: 38 7% 59%;   /* #9f9b93 warm-silver */
-    --accent: 38 28% 91%;
+    --muted: 40 31% 90%;             /* #eee9df */
+    --muted-foreground: 40 6% 60%;   /* #9f9b93 warm-silver */
+    --accent: 40 31% 90%;
     --accent-foreground: 0 0% 0%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 36 19% 83%;            /* #dad4c8 oat */
-    --input: 36 19% 83%;
-    --ring: 157 55% 28%;             /* matcha-600 */
+    --border: 40 20% 82%;            /* #dad4c8 oat */
+    --input: 40 20% 82%;
+    --ring: 154 90% 28%;             /* #078a52 matcha-600 */
     --radius: 0.75rem;
 
     /* Clay shadow tokens */
@@ -51,7 +51,7 @@
     transition: background-color 0.15s, color 0.15s, transform 0.2s, box-shadow 0.2s;
   }
   .clay-btn:hover:not(:disabled) {
-    transform: rotateZ(-8deg) translateY(-4px);
+    transform: rotateZ(-8deg) translateY(-80%);
     box-shadow: var(--shadow-hover);
   }
 
