@@ -51,7 +51,7 @@
     transition: background-color 0.15s, color 0.15s, transform 0.2s, box-shadow 0.2s;
   }
   .clay-btn:hover:not(:disabled) {
-    transform: rotateZ(-8deg) translateY(-80%);
+    transform: rotateZ(-2deg) translateY(-10%);
     box-shadow: var(--shadow-hover);
   }
 
