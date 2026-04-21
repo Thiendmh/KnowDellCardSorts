@@ -88,7 +88,7 @@ export function LandingPageClient() {
           </Link>
           <a
             href="#methodology"
-            className="clay-btn inline-flex items-center gap-2 rounded border border-[#717989] px-7 py-3.5 text-base font-medium text-clay-black hover:bg-lemon-500"
+            className="clay-btn inline-flex items-center gap-2 rounded border border-clay-silver px-7 py-3.5 text-base font-medium text-clay-black hover:bg-lemon-500"
           >
             {t.landing.ctaLearn}
           </a>
