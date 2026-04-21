@@ -454,4 +454,133 @@ export const en: Dict = {
       header: "OCCUPATIONAL INTERESTS / KHÁM PHÁ SỞ THÍCH NGHỀ NGHIỆP",
     },
   },
+  leisure: {
+    common: {
+      deckName: "Hoạt động giải trí & nghỉ hưu",
+      deckNameEn: "Leisure / Retirement Activities",
+    },
+    landing: {
+      title: "Khám phá hoạt động giải trí của bạn",
+      titleEn: "Explore your leisure activities",
+      body: "Sort 48 activities by how often you do them and how much you want to do them, rank your top picks, rate how active you currently are, and see which to keep, develop, or release.",
+      stepsTitle: "You'll go through 4 steps",
+      step1Label: "Sort",
+      step1Body: "Split the 48 activity cards across 5 frequency/desire levels.",
+      step2Label: "Rank",
+      step2Body: "Pick 3, 5, or 8 top activities and put them in order.",
+      step3Label: "Frequency",
+      step3Body: "Rate how actively you're currently doing the top-interest activities.",
+      step4Label: "Results",
+      step4Body: "See four recommended groups and what to do next.",
+      cta: "Get started",
+      timeHint: "Takes about 15–20 minutes",
+    },
+    activityLevels: {
+      unsorted: { label: "Unsorted", short: "Unsorted" },
+      "do-often": { label: "Do Often", short: "Do Often" },
+      "want-more": { label: "Would Like to Do More", short: "Want More" },
+      "used-to": { label: "Used to Do", short: "Used to Do" },
+      "never-tried": { label: "Never Tried", short: "Never Tried" },
+      "not-interested": { label: "Not Interested", short: "Not Interested" },
+    },
+    frequencyLevels: {
+      active: {
+        label: "Currently Active",
+        description: "You regularly do this activity.",
+      },
+      occasional: {
+        label: "Occasionally",
+        description: "You do it sometimes, but not consistently.",
+      },
+      "not-active": {
+        label: "Not Currently Active",
+        description: "You're not currently doing this activity.",
+      },
+    },
+    groups: {
+      priority: {
+        label: "Priority Activities",
+        description: "Your top picks — invest time and energy here.",
+      },
+      "keep-active": {
+        label: "Keep Active",
+        description: "You're interested and doing it — keep it up or do more.",
+      },
+      develop: {
+        label: "Develop",
+        description: "You're interested but not doing it yet — a great opportunity to start.",
+      },
+      release: {
+        label: "Release",
+        description: "Not interested — you can drop these from consideration.",
+      },
+    },
+    sort: {
+      title: "Phân loại theo tần suất & mong muốn",
+      titleEn: "Sort by frequency & desire",
+      instruction: "Drag each activity card into one of the 5 columns. On mobile, tap the card to pick.",
+      unsortedLabel: "Unsorted",
+      counter: (sorted: number, total: number) => `${sorted} / ${total}`,
+      toastUnsorted: (n: number) => `${n} cards still unsorted.`,
+      toastBucketUnderfilled: (bucket: string, need: number) =>
+        `Bucket "${bucket}" needs ${need} more cards.`,
+      hintReady: "All sorted — ready to rank.",
+    },
+    rank: {
+      title: "Xếp hạng hoạt động hay làm nhất",
+      titleEn: "Rank your top leisure activities",
+      instruction: "Choose how many top picks you want to rank, then drag (or use arrows on mobile) to order them.",
+      sizeSelectLabel: "Number of top picks",
+      sizeOption: (n: number) => `Top ${n}`,
+      sizeDisabledHint: (available: number) =>
+        `You need at least ${available} cards in "Do Often" to pick this.`,
+      sizeAutoAdjusted: (n: number) =>
+        `Adjusted to Top ${n} because "Do Often" doesn't have enough cards.`,
+      topZoneLabel: (n: number) => `Your top ${n}`,
+      restZoneLabel: "Other cards (Do Often)",
+      incomplete: (need: number) => `Rank ${need} more card(s) into Top.`,
+    },
+    frequency: {
+      title: "Mức độ thực hiện hiện tại",
+      titleEn: "Current frequency",
+      instruction: "For each card in your 3 top-activity buckets, rate how actively you're currently doing it.",
+      counter: (done: number, total: number) => `${done} / ${total} rated`,
+      sectionHeader: (bucketLabel: string, count: number) =>
+        `${bucketLabel} (${count})`,
+      toastIncomplete: (n: number) => `${n} cards still need a frequency rating.`,
+    },
+    results: {
+      title: "Kết quả hoạt động giải trí",
+      titleEn: "Your leisure activities",
+      subtitle: "Four recommended groups to help you decide what to keep, develop, or release.",
+      countBadge: (n: number) => `${n} cards`,
+      emptyGroup: "No cards in this group.",
+      actions: {
+        copy: "Copy",
+        copied: "Copied!",
+        print: "Print / Save PDF",
+        reset: "Start over",
+        copyFailed: "Copy failed — please try manually",
+      },
+      frequencyBadge: (label: string) => `• ${label}`,
+      rankIndex: (n: number) => `#${n}`,
+    },
+    insights: {
+      headline: (priorityCount: number, keepActiveCount: number) =>
+        `You have ${priorityCount} priority activities and ${keepActiveCount} to keep active.`,
+      tipActiveTop: (n: number) =>
+        `You're actively doing ${n} of your top picks — keep that momentum going.`,
+      tipUntriedHighInterest: (n: number) =>
+        `${n} activities you want to do more are not currently active — try scheduling one this month.`,
+    },
+    reset: {
+      title: "Start this deck over?",
+      body: "This clears your activity sort, ranking, and frequency ratings for the Leisure Activities deck. The other decks are untouched.",
+      confirm: "Start over",
+      cancel: "Cancel",
+    },
+    clipboard: {
+      header: "LEISURE & RETIREMENT ACTIVITIES / HOẠT ĐỘNG GIẢI TRÍ & NGHỈ HƯU",
+    },
+  },
 };

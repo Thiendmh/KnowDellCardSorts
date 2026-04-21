@@ -453,6 +453,135 @@ export const vi = {
       header: "KHÁM PHÁ SỞ THÍCH NGHỀ NGHIỆP / OCCUPATIONAL INTERESTS",
     },
   },
+  leisure: {
+    common: {
+      deckName: "Hoạt động giải trí & nghỉ hưu",
+      deckNameEn: "Leisure / Retirement Activities",
+    },
+    landing: {
+      title: "Khám phá hoạt động giải trí của bạn",
+      titleEn: "Explore your leisure activities",
+      body: "Sắp xếp 48 hoạt động theo tần suất và mong muốn, xếp hạng top lựa chọn, đánh giá mức độ thực hiện hiện tại, và nhận gợi ý hoạt động nên duy trì, phát triển hay buông bỏ.",
+      stepsTitle: "Bạn sẽ đi qua 4 bước",
+      step1Label: "Phân loại",
+      step1Body: "Chia 48 thẻ vào 5 nhóm theo tần suất và mong muốn.",
+      step2Label: "Xếp hạng",
+      step2Body: "Chọn 3, 5 hoặc 8 hoạt động hay làm nhất và xếp thứ tự.",
+      step3Label: "Tần suất",
+      step3Body: "Đánh giá mức độ bạn đang thực hiện các hoạt động quan tâm.",
+      step4Label: "Kết quả",
+      step4Body: "Xem 4 nhóm gợi ý và bước tiếp theo cho bạn.",
+      cta: "Bắt đầu",
+      timeHint: "Thời lượng: ~15–20 phút",
+    },
+    activityLevels: {
+      unsorted: { label: "Chưa phân loại", short: "Chưa phân loại" },
+      "do-often": { label: "Hay làm", short: "Hay làm" },
+      "want-more": { label: "Muốn làm thêm", short: "Muốn thêm" },
+      "used-to": { label: "Từng làm", short: "Từng làm" },
+      "never-tried": { label: "Chưa thử", short: "Chưa thử" },
+      "not-interested": { label: "Không quan tâm", short: "Không" },
+    },
+    frequencyLevels: {
+      active: {
+        label: "Đang thực hiện",
+        description: "Bạn thường xuyên làm hoạt động này.",
+      },
+      occasional: {
+        label: "Thỉnh thoảng",
+        description: "Bạn thỉnh thoảng làm, nhưng không đều.",
+      },
+      "not-active": {
+        label: "Chưa thực hiện",
+        description: "Bạn hiện không thực hiện hoạt động này.",
+      },
+    },
+    groups: {
+      priority: {
+        label: "Hoạt động ưu tiên",
+        description: "Những lựa chọn hàng đầu — dành thời gian và năng lượng cho nhóm này.",
+      },
+      "keep-active": {
+        label: "Duy trì",
+        description: "Bạn quan tâm và đang thực hiện — tiếp tục duy trì hoặc tăng tần suất.",
+      },
+      develop: {
+        label: "Phát triển",
+        description: "Bạn quan tâm nhưng chưa hoặc ít thực hiện — đây là cơ hội để khởi động.",
+      },
+      release: {
+        label: "Buông bỏ",
+        description: "Không quan tâm — có thể loại khỏi danh sách cân nhắc.",
+      },
+    },
+    sort: {
+      title: "Phân loại theo tần suất & mong muốn",
+      titleEn: "Sort by frequency & desire",
+      instruction: "Kéo mỗi thẻ vào một trong 5 cột. Trên di động, nhấn vào thẻ để chọn.",
+      unsortedLabel: "Chưa phân loại",
+      counter: (sorted: number, total: number) => `${sorted} / ${total}`,
+      toastUnsorted: (n: number) => `Còn ${n} thẻ chưa phân loại.`,
+      toastBucketUnderfilled: (bucket: string, need: number) =>
+        `Cột "${bucket}" cần thêm ${need} thẻ nữa.`,
+      hintReady: "Đã xong — sẵn sàng sang bước xếp hạng.",
+    },
+    rank: {
+      title: "Xếp hạng hoạt động hay làm nhất",
+      titleEn: "Rank your top leisure activities",
+      instruction: "Chọn số lượng top bạn muốn xếp hạng, sau đó kéo thả (hoặc dùng mũi tên trên di động) để sắp xếp.",
+      sizeSelectLabel: "Số lượng top",
+      sizeOption: (n: number) => `Top ${n}`,
+      sizeDisabledHint: (available: number) =>
+        `Cần có ít nhất ${available} thẻ ở "Hay làm" để chọn số này.`,
+      sizeAutoAdjusted: (n: number) =>
+        `Đã điều chỉnh về Top ${n} vì nhóm "Hay làm" không đủ thẻ.`,
+      topZoneLabel: (n: number) => `Top ${n} của bạn`,
+      restZoneLabel: `Các thẻ còn lại (Hay làm)`,
+      incomplete: (need: number) => `Cần xếp thêm ${need} hoạt động vào Top.`,
+    },
+    frequency: {
+      title: "Mức độ thực hiện hiện tại",
+      titleEn: "Current frequency",
+      instruction: "Với từng hoạt động trong 3 nhóm quan tâm hàng đầu, cho biết bạn đang thực hiện ở mức nào.",
+      counter: (done: number, total: number) => `${done} / ${total} thẻ đã đánh`,
+      sectionHeader: (bucketLabel: string, count: number) =>
+        `${bucketLabel} (${count})`,
+      toastIncomplete: (n: number) => `Còn ${n} thẻ chưa đánh giá tần suất.`,
+    },
+    results: {
+      title: "Kết quả hoạt động giải trí",
+      titleEn: "Your leisure activities",
+      subtitle: "Bốn nhóm gợi ý giúp bạn quyết định nên duy trì, phát triển hay buông bỏ.",
+      countBadge: (n: number) => `${n} thẻ`,
+      emptyGroup: "Không có thẻ trong nhóm này.",
+      actions: {
+        copy: "Sao chép",
+        copied: "Đã sao chép!",
+        print: "In / Lưu PDF",
+        reset: "Làm lại",
+        copyFailed: "Sao chép thất bại — thử thủ công",
+      },
+      frequencyBadge: (label: string) => `• ${label}`,
+      rankIndex: (n: number) => `#${n}`,
+    },
+    insights: {
+      headline: (priorityCount: number, keepActiveCount: number) =>
+        `Bạn có ${priorityCount} hoạt động ưu tiên và ${keepActiveCount} hoạt động nên duy trì.`,
+      tipActiveTop: (n: number) =>
+        `Bạn đang tích cực thực hiện ${n} hoạt động yêu thích — hãy tận dụng đà này.`,
+      tipUntriedHighInterest: (n: number) =>
+        `Có ${n} hoạt động bạn muốn làm thêm nhưng chưa thực hiện — thử lên kế hoạch cho 1 hoạt động ngay tháng này.`,
+    },
+    reset: {
+      title: "Làm lại bộ thẻ này?",
+      body: "Thao tác này sẽ xoá phân loại, xếp hạng và đánh giá tần suất của bộ Hoạt động giải trí. Các bộ thẻ còn lại không bị ảnh hưởng.",
+      confirm: "Làm lại",
+      cancel: "Huỷ",
+    },
+    clipboard: {
+      header: "HOẠT ĐỘNG GIẢI TRÍ & NGHỈ HƯU / LEISURE & RETIREMENT ACTIVITIES",
+    },
+  },
 };
 
 export type Dict = typeof vi;
