@@ -49,7 +49,7 @@ export function AssignSheet({ card, currentBucket, onClose, onAssign }: AssignSh
                   className={cn(
                     "clay-btn rounded-xl border p-3 text-left text-sm font-semibold transition-colors",
                     BUCKET_STYLE[b],
-                    currentBucket === b && "ring-2 ring-offset-1",
+                    currentBucket === b && "ring-2 ring-offset-1 ring-[var(--deck-color,#078a52)]",
                   )}
                 >
                   {t.buckets[b]}
