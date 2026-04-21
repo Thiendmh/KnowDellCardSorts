@@ -10,7 +10,12 @@ const config: Config = {
       screens: { "2xl": "1280px" },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "Arial", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
+      },
       colors: {
+        // shadcn tokens (kept for Dialog, Accordion, Progress, etc.)
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -43,6 +48,33 @@ const config: Config = {
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
+        },
+        // Clay palette
+        clay: {
+          cream: "#faf9f7",
+          oat: "#dad4c8",
+          "oat-light": "#eee9df",
+          black: "#000000",
+          silver: "#9f9b93",
+          charcoal: "#55534e",
+        },
+        matcha: {
+          300: "#84e7a5",
+          600: "#078a52",
+          800: "#02492a",
+        },
+        lemon: {
+          400: "#f8cc65",
+          500: "#fbbd41",
+          700: "#d08a11",
+        },
+        ube: {
+          300: "#c1b0ff",
+          800: "#43089f",
+          900: "#32037d",
+        },
+        pomegranate: {
+          400: "#fc7981",
         },
       },
       borderRadius: {
