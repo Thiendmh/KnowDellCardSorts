@@ -73,19 +73,19 @@ export const en: Dict = {
     deckExampleLabel: "Example card",
     purposeLabel: "Purpose",
 
-    howItWorksTitle: "How the sort works",
+    howItWorksTitle: "How it works",
     howItWorksSteps: [
       {
-        title: "Sort into 5 buckets",
-        body: "From \"Always Valued\" down to \"Never Valued\" — quickly cuts the list.",
+        title: "Sort cards into groups",
+        body: "Place each card into a category — from \"love it\" to \"no interest\" — to quickly narrow the full deck down to what resonates.",
       },
       {
-        title: "Rank your top 8",
-        body: "Order your most important cards to see what really drives you.",
+        title: "Refine your top picks",
+        body: "Go deeper on the cards that matter: rank them, rate a second dimension, or compare them against your life choices.",
       },
       {
-        title: "Compare your choices",
-        body: "See whether each career/life option supports or conflicts with your core values.",
+        title: "Discover your results",
+        body: "Get a personalized breakdown — what drives you, what you should lean into, and where to focus next.",
       },
     ],
 

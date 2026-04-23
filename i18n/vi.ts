@@ -72,19 +72,19 @@ export const vi = {
     deckExampleLabel: "Ví dụ thẻ",
     purposeLabel: "Mục đích",
 
-    howItWorksTitle: "Quy trình chung",
+    howItWorksTitle: "Cách thức hoạt động",
     howItWorksSteps: [
       {
-        title: "Phân loại vào 5 nhóm",
-        body: "Từ \"Luôn coi trọng\" đến \"Không coi trọng\" — giúp gạn lọc nhanh.",
+        title: "Phân loại thẻ",
+        body: "Xếp từng thẻ vào một nhóm — từ \"rất thích\" đến \"không quan tâm\" — để nhanh chóng lọc ra những điều thực sự phù hợp.",
       },
       {
-        title: "Xếp hạng Top 8",
-        body: "Sắp thứ tự ưu tiên những thẻ quan trọng nhất để thấy rõ điều gì dẫn dắt bạn.",
+        title: "Đi sâu hơn",
+        body: "Nhìn kỹ hơn những thẻ quan trọng nhất: xếp hạng, đánh giá thêm một chiều, hoặc đối chiếu với các lựa chọn trong cuộc sống.",
       },
       {
-        title: "Đối chiếu lựa chọn",
-        body: "Xem lựa chọn nghề nghiệp / cuộc sống của bạn có hỗ trợ hay xung đột với giá trị cốt lõi.",
+        title: "Khám phá kết quả",
+        body: "Nhận kết quả cá nhân hoá — điều gì thúc đẩy bạn, điều gì nên theo đuổi, và nên tập trung vào đâu.",
       },
     ],
 

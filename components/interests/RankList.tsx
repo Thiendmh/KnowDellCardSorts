@@ -3,7 +3,7 @@
 import {
   DndContext,
   DragEndEvent,
-  PointerSensor,
+  MouseSensor,
   useSensor,
   useSensors,
   closestCenter,
@@ -121,7 +121,7 @@ export function RankList({
   const combined = [...topIds, ...restIds];
 
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 6 } }),
   );
 
   function handleDragEnd(e: DragEndEvent) {

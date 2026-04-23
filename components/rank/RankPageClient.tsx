@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   DndContext,
   DragEndEvent,
-  PointerSensor,
+  MouseSensor,
   useSensor,
   useSensors,
   closestCenter,
@@ -59,7 +59,7 @@ export function RankPageClient() {
   }, [hydrated, alwaysCount, rankedTop8.length, router, syncRankedFromAlways]);
 
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 6 } }),
   );
 
   function handleDragEnd(e: DragEndEvent) {
